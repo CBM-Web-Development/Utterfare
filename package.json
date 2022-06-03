@@ -10,7 +10,7 @@
   "dependencies_base": "node_modules",
   "dependencies_dest": "assets/js",
   "devDependencies": {
-    "@angular/core": "^8.2.14",
+    "@angular/core": "^11.0.5",
     "@angular/router": "^8.2.14",
     "angular": "^1.7.9",
     "angular-gtag": "^1.0.4",
