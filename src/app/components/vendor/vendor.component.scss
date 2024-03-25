@@ -1,0 +1,21 @@
+
+.vendor {
+    position:relative;
+    display:flex;
+
+    .banner {
+        width: 100%;
+        background-color: rgba(0,0,0,0.3);
+        height: 300px;
+    }
+
+    .vendor-information {
+        max-width: 600px; 
+        width: 100%;
+        position:absolute;
+        top: -25px;
+        height: 300px;
+        background: #ffffff;
+        z-index: 10;
+    }
+}
