@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '', 
     component: MainLayoutComponent,
     children: [
-      {path: ':vendor', component: VendorComponent}
+      {path: ':vendorSlug', component: VendorComponent}
     ]
   },
 ];
