@@ -10,13 +10,15 @@ import { MainLayoutComponent } from './components/common/main-layout/main-layout
 import { VendorComponent } from './components/vendor/vendor.component';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
+import { NotFoundComponent } from './components/common/not-found/not-found.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MainLayoutComponent,
-    VendorComponent
+    VendorComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserAnimationsModule,
