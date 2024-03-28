@@ -1,0 +1,46 @@
+<div class="results">
+    <div class="options">
+        <span>
+            <form [formGroup]="resultsFilterFormGroup">
+                <label>Sort By</label>
+                <select class="form-select" formControlName="sortBy">
+                    <option value="match">Closest Match</option>
+                    <option value="asc">Distance (Asc.)</option>
+                    <option value="desc">Distance (Desc.)</option>
+                </select>
+            </form>
+        </span>
+    </div>
+    <div class="results">
+        <ul class="list">
+            @for(result of filteredResults.slice(start, end); track result.item.id; let resultIndex = $index){
+                <li class="list-item">
+                    <span class="image"></span>
+                    <span class="information">
+                        <h4>{{ result.item.itemName }}</h4>
+                        <p class="vendor">
+                            <a class="name" [routerLink]="['/',result.vendor.slug]"> {{ result.vendor.name }}</a>
+                            <span class="distance"> {{ result.distance.toFixed(2) }} mi </span>
+                        </p>
+                        <p clas="description">{{ result.item.itemDescription }}</p>
+                    </span>
+                    <span class="price">{{result.item.currency}}{{result.item.price}}</span>
+                </li>
+            }
+        </ul>
+        <ul class="pagination">
+            @for(page of pages(this.maxPages); track page; let pageIndex = $index){
+                <li class="page-item">
+                    <button 
+                        type="button" 
+                        class="btn btn-link {{activePage === pageIndex + 1 ? 'active' : ''}}" 
+                        (click)="goToPage(pageIndex + 1)">
+                        
+                        {{pageIndex + 1}}
+
+                    </button>
+                </li>
+            }
+        </ul>
+    </div> 
+</div>

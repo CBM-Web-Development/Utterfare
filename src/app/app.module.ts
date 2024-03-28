@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +12,10 @@ import { VendorComponent } from './components/vendor/vendor.component';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 import { NotFoundComponent } from './components/common/not-found/not-found.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SearchComponent } from './components/common/search/search.component';
+import { ResultsComponent } from './components/results/results.component';
 
 
 @NgModule({
@@ -18,12 +23,18 @@ import { NotFoundComponent } from './components/common/not-found/not-found.compo
     AppComponent,
     MainLayoutComponent,
     VendorComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LandingPageComponent,
+    ResultsComponent,
+    SearchComponent
   ],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    GoogleMapsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
     ToastrModule.forRoot()
