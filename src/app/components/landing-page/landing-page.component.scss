@@ -1,0 +1,21 @@
+.landing-page {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+
+    .search {
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(0.25turn, #00ced1,  #007274,  #007274, #00ced1);
+        width: 100%;
+
+        h1 {
+            color: #fefefe;
+        }
+        
+    }
+    
+}
