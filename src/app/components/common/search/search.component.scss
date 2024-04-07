@@ -3,7 +3,9 @@
     flex-direction: row;
     width: 100%;
     justify-content: center;
-    
+    flex-wrap: wrap;
+
+
     label{
         color: #fefefe;
     }
@@ -18,6 +20,12 @@
 
     .terms-section {
         width: 350px;
+            
+    @media(max-width:798px), screen and (orientation: portrait){
+        min-width: 100%;
+        flex-grow: 1;
+    }
+
     }
 
     .location-section {

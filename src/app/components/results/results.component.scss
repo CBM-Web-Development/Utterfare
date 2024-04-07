@@ -12,9 +12,15 @@
         max-width: 800px;
     }
 
-    .results {
+    .search-results {
+        display:flex;
+        flex-direction: column;
+        min-height: 400px;
         width: 100%;
         max-width: 800px;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
 
         .list {
             list-style-type: none;
@@ -28,6 +34,10 @@
                 border-image: linear-gradient(0.25turn, #f3f3f3,  #8e8e8e, #8e8e8e, #f3f3f3);
                 border-image-slice: 1; 
                 margin-bottom: 24px;
+
+                @media(max-width: 798px), screen and (orientation: portrait){
+                    flex-direction: column;
+                }
 
                 &:last-of-type {
                     border-bottom: none;

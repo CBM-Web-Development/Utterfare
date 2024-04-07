@@ -19,6 +19,7 @@ export class ResultsComponent implements OnInit {
   end = this.perPage;
   maxPages = 1;
   activePage = 1;
+  isLoading = true;
 
   resultsFilterFormGroup = new FormGroup({
     sortBy: new FormControl('match')
@@ -43,7 +44,6 @@ export class ResultsComponent implements OnInit {
           distance: location.distance
         }
       };
-
       this.doSearch(searchParams);
     }
   }
@@ -57,7 +57,7 @@ export class ResultsComponent implements OnInit {
     this.searchService.doSearch(params).pipe( take(1) ).subscribe( response => {
       this.filteredResults = this.allResults = response.sort((a, b) => {return a.rank - b.rank});
       this.maxPages = Math.ceil(this.allResults.length / this.perPage);
-      console.log(this.maxPages);
+      this.isLoading = false;
     });
   }
 
