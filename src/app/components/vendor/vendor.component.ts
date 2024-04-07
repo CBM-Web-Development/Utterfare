@@ -4,6 +4,7 @@ import { VendorProfileService } from '../../lib/services/vendor-profile/vendor-p
 import { take } from 'rxjs';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { getCurrencySymbol } from '../../lib/utils/currency';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-vendor',
@@ -19,18 +20,31 @@ export class VendorComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private vendorProfileService: VendorProfileService,
+    private meta: Meta,
+    private router: Router,
+    private titleService: Title
   ){}
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.params['vendorSlug']
     this.vendorProfileService.getVendorProfileBySlug(this.slug).pipe( take(1) ).subscribe( response => {
       this.profile = response;
-      console.log(this.profile);
+      this.setMeta()
+
     });
   }
   ngOnDestroy(): void {
   }
-
+  setMeta(){
+    this.titleService.setTitle(`${this.profile.vendor?.name} | Utterfare` ?? 'Utterfare')
+    this.meta.addTag({name: 'title', content: this.profile.vendor?.name ?? 'Utterfare'});
+    this.meta.addTag({name: 'og:url', content: this.router.url});
+    this.meta.addTag({name: 'og:type', content: 'website'});
+    this.meta.addTag({name: 'og:title', content: this.profile.vendor?.name ?? 'Utterfare'});
+    this.meta.addTag({name: 'og:description', content: this.profile.vendor?.description ?? ''});
+    this.meta.addTag({name: 'og:image', content: this.profile.vendor?.profilePicture ?? ''});
+    this.meta.addTag({name: 'description', content: this.profile.vendor?.description ?? 'Utterfare is the only menu item search engine. Fine the food you want, when you want it!'});
+  }
   scrollToSection(section: HTMLElement){
     section.scrollIntoView({ behavior: 'smooth', block: 'start'});
   }

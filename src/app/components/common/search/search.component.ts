@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ILocation } from '../../../lib/interfaces/ilocation';
 import { ISearchRequest } from '../../../lib/interfaces/isearch-request';
+import { Meta, Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -25,18 +27,32 @@ export class SearchComponent implements OnInit{
     searchRadius: new FormControl(5, [Validators.required])
   });
 
-  constructor(){}
+  constructor(
+    private titleService: Title,
+    private router: Router, 
+    private meta: Meta,
+  ){}
 
   ngOnInit(){
     if (this.getCurrentLocationOnLoad === true) {
       this.getCurrentLocation();
+      this.setMeta()
     }
   }
 
   ngAfterViewInit(): void {
     this.getPlaceAutocomplete();
   }
-
+  setMeta(){
+    this.titleService.setTitle('Utterfare')
+    this.meta.addTag({name: 'title', content: 'Utterfare - The restaurant menu item search engine.'});
+    this.meta.addTag({name: 'og:url', content: this.router.url});
+    this.meta.addTag({name: 'og:type', content: 'website'});
+    this.meta.addTag({name: 'og:title', content: 'Utterfare - The restaurant menu item search engine.'});
+    this.meta.addTag({name: 'og:description', content: 'Utterfare is the only menu item search engine. Fine the food you want, when you want it!'});
+    this.meta.addTag({name: 'og:image', content: '/assets/images/Logo.png'});
+    this.meta.addTag({name: 'description', content: 'Utterfare is the only menu item search engine. Fine the food you want, when you want it!'});
+  }
   search(){
     const terms = this.searchFormGroup.controls.searchTerms.value ?? '';
     const distance = this.searchFormGroup.controls.searchRadius.value ?? 0.0;
