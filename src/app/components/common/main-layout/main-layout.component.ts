@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './main-layout.component.scss'
 })
 export class MainLayoutComponent {
-
+  constructor(){}
 }
