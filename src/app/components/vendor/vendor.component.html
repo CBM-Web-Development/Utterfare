@@ -11,7 +11,7 @@
     
 
     <div class="vendor-body">
-        <ul class="navigation">
+        <ul class="navigation sticky-lg-top">
             <li class="item">
                 <a class="btn btn-link nav-link" (click)="scrollToSection(description)">Description</a>
             </li>
@@ -42,7 +42,6 @@
         <div class="section" id="menus" #menus>
             <h2 class="section-title">Menus</h2>
             <span class="section-content menu-section">
-                @if(profile.menus !== undefined && profile.menus!.length > 0){
                     <ul 
                         ngbNav 
                         #nav="ngbNav" 
@@ -51,7 +50,7 @@
 
                         @for(menu of profile.menus; track menu.id; let menuIndex = $index){
                             <li 
-                                [ngbNavItem]="menuIndex" 
+                                [ngbNavItem]="menuIndex"
                                 class="nav-item">
                                     <button 
                                         ngbNavLink>
@@ -81,13 +80,39 @@
                                     </ng-template>
                             </li>
                         }
+                        <li
+                            [ngbNavItem]="profile.menus === undefined ? 0 : profile.menus.length" 
+                            class="nav-item">
+                            <button 
+                                ngbNavLink>
+                                All Items
+                            </button>
+
+                            <ng-template ngbNavContent>
+                                <div class="menu">
+                                    <div class="section">
+                                    <ul class="list-group menu-items"> 
+                                        @for(menuItem of profile.menuItems; track menuItem; let menuItemIndex = $index){
+                                            <li class="list-group-item menu-item">
+                                                <span class="item-details">
+                                                    <span class="name">{{ getItemTitle(menuItem.id) }} </span>
+                                                    <span class="description">{{ getItemDescription(menuItem.id) }}</span>
+                                                </span>
+                                                <span class="item-price"> {{ getItemPrice(menuItem.id) }}</span>
+                                            </li>
+                                        }
+                                    </ul>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </li>
                     </ul>
-                <div [ngbNavOutlet]="nav"></div>
-                } @else {
-                    <span class="placeholder">No menus to display</span>
-                }
-               
+                <div [ngbNavOutlet]="nav"></div>               
             </span>
+
+            @if( checkOverflow(menus) ){
+                <button type="button" class="btn text-center w-100"><i class="bi bi-chevron-down"></i></button>
+            }
         </div>
         <div class="section location-section" #hoursContactInformation>
             <h2 class="section-title">Hours &amp; Contact Information</h2>
@@ -97,7 +122,7 @@
                     <span class="placeholder-text">Coming soon</span>
                 </div>
                 <div class="locations">
-                    <h3>Location{{profile.locations!.length > 1 ? 's' : ''}}</h3>
+                    <h3>Location{{ profile.locations !== undefined && profile.locations!.length > 1 ? 's' : ''}}</h3>
                     @if(profile.locations !== undefined && profile.locations!.length > 0){
                         @for(location of profile.locations; track location.id; let locationIndex = $index){
                             <p>{{location.formattedAddress}}</p>

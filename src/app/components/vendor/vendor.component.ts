@@ -5,6 +5,7 @@ import { take } from 'rxjs';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { getCurrencySymbol } from '../../lib/utils/currency';
 import { Meta, Title } from '@angular/platform-browser';
+import { MenuItemService } from '../../lib/services/MenuItem/menu-item.service';
 
 @Component({
   selector: 'app-vendor',
@@ -16,21 +17,23 @@ export class VendorComponent implements OnInit, OnDestroy {
   slug: string = '';
   profile: IVendorProfile = {};
   activeMenuIndex = 0;
+  allItems = '';
 
   constructor(
     private route: ActivatedRoute,
     private vendorProfileService: VendorProfileService,
     private meta: Meta,
     private router: Router,
-    private titleService: Title
+    private titleService: Title,
+    private menuItemService: MenuItemService
   ){}
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.params['vendorSlug']
+    
     this.vendorProfileService.getVendorProfileBySlug(this.slug).pipe( take(1) ).subscribe( response => {
       this.profile = response;
       this.setMeta()
-
     });
   }
   ngOnDestroy(): void {
@@ -66,4 +69,8 @@ export class VendorComponent implements OnInit, OnDestroy {
 
     return `${getCurrencySymbol(currency)}${price?.toFixed(2) ?? ''}`;
   }
-}
+
+  checkOverflow(element: any): boolean{
+    return element.offsetHeight > 400;
+  }
+} 

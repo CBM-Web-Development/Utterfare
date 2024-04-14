@@ -17,8 +17,10 @@ export class SearchService {
   ) { }
 
   doSearch(request: ISearchRequest): Observable<ISearchResult[]>{
+    console.log(request);
     const results = this.httpClient.post<ISearchResult[]>(SEARCH_ROUTE, request)
       .pipe( map((response: ISearchResult[]) => {
+        console.log(response);
         return response;
       }), catchError( error => {
         this.toast.error("Error running search. Please try again.")
