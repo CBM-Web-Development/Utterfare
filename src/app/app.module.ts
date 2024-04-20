@@ -16,6 +16,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './components/common/search/search.component';
 import { ResultsComponent } from './components/results/results.component';
+import { MenuItemComponent } from './components/menu-item/menu-item.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ResultsComponent } from './components/results/results.component';
     NotFoundComponent,
     LandingPageComponent,
     ResultsComponent,
-    SearchComponent
+    SearchComponent,
+    MenuItemComponent
   ],
   imports: [
     BrowserAnimationsModule,

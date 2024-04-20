@@ -11,7 +11,7 @@
     
 
     <div class="vendor-body">
-        <ul class="navigation sticky-lg-top">
+        <ul class="navigation sticky-top">
             <li class="item">
                 <a class="btn btn-link nav-link" (click)="scrollToSection(description)">Description</a>
             </li>
@@ -52,19 +52,21 @@
                             <li 
                                 [ngbNavItem]="menuIndex"
                                 class="nav-item">
-                                    <button 
+                                    <button  
                                         ngbNavLink>
                                         {{ menu.name }}
                                     </button>
 
                                     <ng-template ngbNavContent>
-                                        <div class="menu">
+                                        <div 
+                                        class="menu"
+                                        [style.backgroundColor]="background">
                                             @for(section of menu.sectionsObj; track section; let sectionIndex = $index){
                                                 <div class="section">
                                                     <h3 class="section-title">{{ section.title }}</h3>
                                                     <ul class="list-group menu-items"> 
                                                         @for( item of section.items; track item; let itemIndex = $index ){
-                                                            <li class="list-group-item menu-item">
+                                                            <li class="list-group-item menu-item"> 
                                                                 <span class="item-details">
                                                                     <span class="name">{{ getItemTitle(item) }} </span>
                                                                     <span class="description">{{ getItemDescription(item) }}</span>
@@ -88,10 +90,17 @@
                                 All Items
                             </button>
 
-                            <ng-template ngbNavContent>
-                                <div class="menu">
+                            <ng-template 
+                            #menuItemsList
+                            ngbNavContent>
+                                <div 
+                                    class="menu"
+                                    [style.height]="menuHeight"
+                                    >
                                     <div class="section">
-                                    <ul class="list-group menu-items"> 
+                                    <ul 
+                                    class="list-group menu-items"
+                                    > 
                                         @for(menuItem of profile.menuItems; track menuItem; let menuItemIndex = $index){
                                             <li class="list-group-item menu-item">
                                                 <span class="item-details">
@@ -110,8 +119,17 @@
                 <div [ngbNavOutlet]="nav"></div>               
             </span>
 
-            @if( checkOverflow(menus) ){
-                <button type="button" class="btn text-center w-100"><i class="bi bi-chevron-down"></i></button>
+            @if( showOverflowToggle ){
+                <button 
+                type="button" 
+                class="btn text-center w-100" 
+                (click)="toggleMenuExpand()">
+                @if(menuHeight === '400px') {
+                    <i class="bi bi-chevron-down"></i>
+                }@else {
+                    <i class="bi bi-chevron-up"></i>
+                }
+                </button>
             }
         </div>
         <div class="section location-section" #hoursContactInformation>
@@ -141,8 +159,11 @@
 
     <div class="sticky-lg-top reservation-form">
         <h2 class="title">Reservations</h2>
-        <div class="reservations-body">                
-            <span class="placeholder-text">Coming soon</span>
+        <div class="reservation-body">                
+            @if(profile.vendor?.primaryPhone !== null){
+                <a class="reservation-link" href="tel:{{profile.vendor?.primaryPhone}}"><i class="bi bi-telephone"></i> {{profile.vendor?.primaryPhone}}</a>
+                <p>Call to request a reservation</p>
+            }
         </div>
     </div>
     

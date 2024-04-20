@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { IVendorProfile } from '../../lib/interfaces/ivendor-profile';
 import { VendorProfileService } from '../../lib/services/vendor-profile/vendor-profile.service';
 import { take } from 'rxjs';
@@ -13,11 +13,16 @@ import { MenuItemService } from '../../lib/services/MenuItem/menu-item.service';
   styleUrl: './vendor.component.scss'
 })
 
-export class VendorComponent implements OnInit, OnDestroy {
+export class VendorComponent implements OnInit, OnDestroy, AfterViewInit {
   slug: string = '';
   profile: IVendorProfile = {};
   activeMenuIndex = 0;
   allItems = '';
+  menuHeight = '400px';
+  showOverflowToggle = false;
+  background='black'
+
+  @ViewChild('menus') menus?: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,13 +35,16 @@ export class VendorComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.params['vendorSlug']
-    
     this.vendorProfileService.getVendorProfileBySlug(this.slug).pipe( take(1) ).subscribe( response => {
       this.profile = response;
+      this.checkOverflow();
       this.setMeta()
     });
   }
-  ngOnDestroy(): void {
+  ngAfterViewInit(): void {
+    
+    this.menus!.nativeElement;
+    
   }
   setMeta(){
     this.titleService.setTitle(`${this.profile.vendor?.name} | Utterfare` ?? 'Utterfare')
@@ -70,7 +78,15 @@ export class VendorComponent implements OnInit, OnDestroy {
     return `${getCurrencySymbol(currency)}${price?.toFixed(2) ?? ''}`;
   }
 
-  checkOverflow(element: any): boolean{
-    return element.offsetHeight > 400;
+  checkOverflow(){
+    const element = this.menus!.nativeElement;
+    console.log(element.parentNode.offsetHeight);
+    this.showOverflowToggle = element.parentNode.offsetHeight > 400;
+  }
+
+  toggleMenuExpand(){
+    this.menuHeight = this.menuHeight === '400px' ? 'auto' : '400px';
+  }
+  ngOnDestroy(): void {
   }
 } 
