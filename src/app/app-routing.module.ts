@@ -5,6 +5,10 @@ import { VendorComponent } from './components/vendor/vendor.component';
 import { NotFoundComponent } from './components/common/not-found/not-found.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ResultsComponent } from './components/results/results.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { PasswordResetComponent } from './components/password-reset/password-reset.component';
 
 const routes: Routes = [
   {
@@ -13,6 +17,10 @@ const routes: Routes = [
     children: [
       {path: '', component: LandingPageComponent},
       {path: 'search', component: ResultsComponent},
+      {path: 'login', component: LoginComponent},
+      {path: 'sign-up', component: SignUpComponent},
+      {path: 'reset-password', component: PasswordResetComponent},
+      {path: 'profile/:id', component: ProfileComponent},
       {path: ':vendorSlug', component: VendorComponent}
     ]
   },

@@ -16,6 +16,10 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './components/common/search/search.component';
 import { ResultsComponent } from './components/results/results.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { LoginComponent } from './components/login/login.component';
+import { PasswordResetComponent } from './components/password-reset/password-reset.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 
 @NgModule({
@@ -26,7 +30,11 @@ import { ResultsComponent } from './components/results/results.component';
     NotFoundComponent,
     LandingPageComponent,
     ResultsComponent,
-    SearchComponent
+    SearchComponent,
+    ProfileComponent,
+    LoginComponent,
+    PasswordResetComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserAnimationsModule,

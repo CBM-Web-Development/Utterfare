@@ -1,6 +1,16 @@
+<nav class="navbar navbar-expand bg-body-secondary">
+    <div class="container-fluid">
+        <a href="https://vendor.utterfare.com" class="text-dark ms-auto">Vendor Login</a>
+    </div>
+</nav>
 <nav class="navbar navbar-expand bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="/"><img src="assets/images/Logo.png">Utterfare</a>
+        <div class="ms-auto">
+            <a [routerLink]="!isLoggedIn ? ['login'] : ['profile', currentUser.id]" class="user-profile">
+                <i class="bi bi-person"></i>
+            </a>
+        </div>
     </div>
 </nav>
 <main class="app">
