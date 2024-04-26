@@ -1,9 +1,9 @@
-import { IMenuItem } from "./imenu-item";
 import { IVendor } from "./ivendor";
+import { IVendorItem } from "./ivendor-item";
 
 export interface ISearchResult {
     vendor: IVendor; 
     distance: number; 
-    item: IMenuItem;
+    item: IVendorItem;
     rank: number;
 }

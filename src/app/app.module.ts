@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './components/common/search/search.component';
 import { ResultsComponent } from './components/results/results.component';
 import { MenuItemComponent } from './components/menu-item/menu-item.component';
+import { ReviewComponent } from './components/common/review/review.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { MenuItemComponent } from './components/menu-item/menu-item.component';
     LandingPageComponent,
     ResultsComponent,
     SearchComponent,
-    MenuItemComponent
+    MenuItemComponent,
+    ReviewComponent
   ],
   imports: [
     BrowserAnimationsModule,

@@ -66,7 +66,7 @@
                                                     <h3 class="section-title">{{ section.title }}</h3>
                                                     <ul class="list-group menu-items"> 
                                                         @for( item of section.items; track item; let itemIndex = $index ){
-                                                            <li class="list-group-item menu-item"> 
+                                                            <li class="list-group-item menu-item" (click)="navigateToItem(item)"> 
                                                                 <span class="item-details">
                                                                     <span class="name">{{ getItemTitle(item) }} </span>
                                                                     <span class="description">{{ getItemDescription(item) }}</span>
@@ -102,7 +102,7 @@
                                     class="list-group menu-items"
                                     > 
                                         @for(menuItem of profile.menuItems; track menuItem; let menuItemIndex = $index){
-                                            <li class="list-group-item menu-item">
+                                            <li class="list-group-item menu-item"  (click)="navigateToItem(menuItem.id)">
                                                 <span class="item-details">
                                                     <span class="name">{{ getItemTitle(menuItem.id) }} </span>
                                                     <span class="description">{{ getItemDescription(menuItem.id) }}</span>

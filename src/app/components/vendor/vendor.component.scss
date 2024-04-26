@@ -161,6 +161,10 @@
                                     display:flex; 
                                     flex-direction: row; 
                                     
+                                    &:hover{
+                                        cursor: pointer;
+                                    }
+
                                     .item-details{
                                         display:flex;
                                         flex-direction: column;

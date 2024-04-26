@@ -1,1 +1,156 @@
-<p>menu-item works!</p>
+<div class="banner">
+    <div class="title-section">
+
+        <h1 class="title">{{menuItem.vendorItem?.itemName}}</h1>
+        <h2 class="subtitle">
+            <a [routerLink]="[menuItem.vendor?.slug]">
+                @if(menuItem.vendor?.profilePicture){
+                    <img class="profile-picture" src="{{menuItem.vendor?.profilePicture}}">
+                }
+                {{menuItem.vendor?.name}}
+            </a>
+        </h2>
+
+    </div>
+</div>
+<div class="content">
+    <div class="section">
+        <div class="info">
+            <div class="rating">
+                {{calulatedRating()}}
+                <ul class="list">
+                    <li class="item">
+                        <img 
+                            src="assets/images/artichoke-outline.png" 
+                            class="rating-item"/>
+                    </li>
+                    <li class="item">
+                        <img src="assets/images/artichoke-outline.png" class="rating-item"/>
+                    </li>
+                    <li class="item">
+                        <img src="assets/images/artichoke-outline.png" class="rating-item"/>
+                    </li>
+                    <li class="item">
+                        <img src="assets/images/artichoke-outline.png" class="rating-item"/>
+                    </li>
+                    <li class="item">
+                        <img src="assets/images/artichoke-outline-75.png" class="rating-item"/>
+                    </li>
+                </ul>
+                <span class="summary">
+                    4.5 out of 5 
+                </span>
+            </div>
+            <div class="price">$24.99</div>
+        </div>
+    </div>
+    <div class="section" #description>
+        <span class="description">
+            {{menuItem.vendorItem?.itemDescription}}
+        </span>
+    </div>
+    <div class="section" #gallery>
+        <h3>Gallery</h3>
+        <p class="placeholder-text">Coming soon...</p>
+    </div>
+    <div class="section" #reviews>
+        <h3>Reviews</h3>
+        <button class="btn btn-link" (click)="toggleReviewForm()">Leave a review</button>
+        @if(menuItem.itemReviews !== undefined && menuItem.itemReviews !== null && menuItem.itemReviews!.length > 0){
+            <ul class="reviews-list">
+                @for(review of parsedReviews; track review.id; let reviewIndex = $index){
+                    <li class="list-item">
+                        <app-review [review]=review></app-review>
+                        @if(review.children !== undefined){
+                            <ul class="children">
+                                @for(child of review.children; track child.id; let childIndex = $index){
+                                    <li><app-review [review]=child></app-review></li>
+                                }
+                            </ul>
+                        }
+                    </li>
+                }
+            </ul>
+        }
+        <div #reviewForm>
+        @if(isReviewFormVisible){
+            <form [formGroup]="itemReviewFormGroup" class="review-form" #reviewForm (submit)="submitReview()">
+                <h4>Leave a review</h4>
+                <div class="row mb-3">
+                    <label>Overall Rating*</label>
+                        <ul class="rating">
+                            <li class="item">
+                                <img 
+                                src="assets/images/artichoke-outline.png" 
+                                class="rating-item" 
+                                (mouseover)="handleHover(1, item_1)" 
+                                (mouseout)="handleHover(1, item_1)" 
+                                #item_1 id="item_1" 
+                                (click)="setRating(1)"/>
+                            </li>
+                            <li class="item">
+                                <img src="{{setRatingImage(2)}}" class="rating-item" (mouseover)="handleHover(2, item_2)" (mouseout)="handleHover(2, item_2)"#item_2 id="item_2" (click)="setRating(2)"/>
+                            </li>
+                            <li class="item">
+                                <img src="{{setRatingImage(3)}}" class="rating-item" (mouseover)="handleHover(3, item_3)" (mouseout)="handleHover(3, item_3)"#item_3 id="item_3" (click)="setRating(3)"/>
+                            </li>
+                            <li class="item">
+                                <img src="{{setRatingImage(4)}}" class="rating-item" (mouseenter)="handleHover(4, item_4)" (mouseout)="handleHover(4, item_4)"#item_4 id="item_4" (click)="setRating(4)"/>
+                            </li>
+                            <li class="item">
+                                <img src="{{setRatingImage(5)}}" class="rating-item" (mouseenter)="handleHover(5, item_5)" (mouseout)="handleHover(5, item_5)"#item_5 id="item_5" (click)="setRating(5)"/>
+                            </li>
+                        </ul>
+                        @if(itemReviewFormGroup.dirty && itemReviewFormGroup.controls.rating.invalid){
+                            <p class="text-danger">Please select a rating 1 - 5.</p>
+                        }
+                </div>
+                <div class="row mb-3">
+                    <label>Title</label>
+                    <input type="text" class="form-control" formControlName="title"/>
+                </div>
+                <div class="row mb-3">
+                    <label>Review</label>
+                    <textarea type="text" class="form-control" formControlName="content"></textarea>
+                </div>
+                <div class="row mb-3">
+                    <div class="media">
+                        <div class="upload">
+                            <input type="file" formControlName="media" #files (change)="onMediaPicked($event)" hidden accept="image/*" multiple/>
+                            <button type="button" class="btn btn-outline-secondary media-upload__btn" (click)="toggleFilesUpload(files)">Upload media</button>
+                        </div>
+                        <div class="items">
+                            @if(mediaIsLoading){
+                               <div class="loading-section">
+                                    <div class="loading-indicator">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                </div> 
+                            }
+                            @if(activeReview.media === undefined || activeReview.media === null || activeReview.media.length < 1){
+                                <p class="placeholder-text">Upload some media</p>
+                            } @else {
+                                <div class="media-items">
+                                    @for(mediaItem of activeReview.tmpMedia; track mediaItem; let mediaIndex = $index){
+                                        <span class="item">
+                                            <button type="button" class="btn btn-remove" (click)="removeMediaItem(mediaItem.id!)"><i class="bi bi-x"></i></button>
+                                            <img src="{{mediaItem.url}}" class="thumbnail">
+                                        </span>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-outline-primary">Submit Review</button>
+            </form>
+        }
+        </div>
+    </div>
+    <div class="section" #related>
+        <h3>Related Items</h3>
+        <p class="placeholder-text">Coming soon...</p>
+    </div>
+</div>

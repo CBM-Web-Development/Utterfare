@@ -15,4 +15,5 @@ export interface IVendorItem {
     isVegetarian?: boolean;
     currency?: string;
     price?: number;
+    slug?: string
 }

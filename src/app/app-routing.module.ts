@@ -5,6 +5,7 @@ import { VendorComponent } from './components/vendor/vendor.component';
 import { NotFoundComponent } from './components/common/not-found/not-found.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ResultsComponent } from './components/results/results.component';
+import { MenuItemComponent } from './components/menu-item/menu-item.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
     children: [
       {path: '', component: LandingPageComponent},
       {path: 'search', component: ResultsComponent},
-      {path: ':vendorSlug', component: VendorComponent}
+      {path: ':vendorSlug', component: VendorComponent},
+      {path: ':vendorSlug/:itemSlug', component: MenuItemComponent}
     ]
   },
   {path: '**', component: NotFoundComponent}

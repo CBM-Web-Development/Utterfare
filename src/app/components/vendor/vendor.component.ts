@@ -5,7 +5,11 @@ import { take } from 'rxjs';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { getCurrencySymbol } from '../../lib/utils/currency';
 import { Meta, Title } from '@angular/platform-browser';
-import { MenuItemService } from '../../lib/services/MenuItem/menu-item.service';
+import { MenuItemService } from '../../lib/services/menu-item/menu-item.service';
+import { IMenuItem } from '../../lib/interfaces/imenu-item';
+import { IVendorItem } from '../../lib/interfaces/ivendor-item';
+import { IMenu } from '../../lib/interfaces/imenu';
+import { IVendor } from '../../lib/interfaces/ivendor';
 
 @Component({
   selector: 'app-vendor',
@@ -86,6 +90,11 @@ export class VendorComponent implements OnInit, OnDestroy, AfterViewInit {
 
   toggleMenuExpand(){
     this.menuHeight = this.menuHeight === '400px' ? 'auto' : '400px';
+  }
+
+  navigateToItem(itemId: number){
+    const selectedItem: IVendorItem = this.profile.menuItems?.find(x => x.id === itemId)!;
+    this.router.navigate([selectedItem.slug], {relativeTo: this.route})
   }
   ngOnDestroy(): void {
   }
