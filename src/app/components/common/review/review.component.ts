@@ -11,20 +11,30 @@ export class ReviewComponent {
   @Input('review') review!: IVendorItemReview;
   @Input('isChild') isChild!: boolean;
 
+
   constructor(){}
 
   formatDisplayName(profile: IProfile): string{
     let displayName: string[] = [];
-    if(profile.firstName !== undefined){
-      displayName.push(profile.firstName);
-
-      if(profile.lastName !== undefined){
-        displayName.push(profile.lastName);
-      }
-    }else {
-      displayName.push(profile.username ?? 'Utterfare Diner');
+    if(profile !== undefined){
+      if(profile.firstName !== undefined){
+        displayName.push(profile.firstName);
+  
+        if(profile.lastName !== undefined){
+          displayName.push(profile.lastName);
+        }
+      }else {
+        displayName.push(this.username(profile.id) ?? 'Utterfare Diner');
+      } 
+    } else {
+      displayName.push('Utterfare Diner');
     }
+   
     return displayName.join(' ');
+  }
+
+  username(profileId: number): string{
+    return '';
   }
 
   formatDate(date: Date): string{
@@ -33,8 +43,6 @@ export class ReviewComponent {
     const month = date.getMonth();
     const day = date.getDate();
     const year = date.getFullYear;
-
-
 
     return time;
   }

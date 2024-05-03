@@ -9,6 +9,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { IMedia } from '../../lib/interfaces/imedia';
 import { MediaService } from '../../lib/services/media/media.service';
+import { select, Store } from '@ngrx/store';
+import { IAuthUser } from '../../lib/interfaces/iauth-user';
+import { getCurrencySymbol } from '../../lib/utils/currency';
 
 @Component({
   selector: 'app-menu-item',
@@ -18,10 +21,25 @@ import { MediaService } from '../../lib/services/media/media.service';
 export class MenuItemComponent implements OnInit, OnDestroy {
   menuItem: IMenuItem = {};
   parsedReviews: IVendorItemReview[] = [];
-  isReviewFormVisible = true;
+  isReviewFormVisible = false;
   activeReview: IVendorItemReview = {};
   mediaIsLoading = false; 
   mediaIsLoading$ = new Subscription();
+  authUser: IAuthUser = {
+    auth: {
+      id: 0,
+      username: '',
+      token: '',
+      type: '',
+      accountsId: []
+    },
+    profile: {
+      id: 0,
+      userId: 0,
+      emailAddress: ''
+    }
+  };
+  authUser$ = new Subscription();
   
   @ViewChild('reviewForm') reviewForm!: ElementRef<HTMLFormElement>;
   @ViewChild('item_1') item_1?: ElementRef<HTMLImageElement>;
@@ -42,10 +60,15 @@ export class MenuItemComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute, 
     private toastr: ToastrService,
     private menuItemService: MenuItemService,
-    private mediaService: MediaService
+    private mediaService: MediaService,
+    private store: Store<{userAuth: IAuthUser}>
   ){}
 
   ngOnInit(): void {
+    this.authUser$ = this.store.pipe( select('userAuth') ).subscribe( (response: IAuthUser) => {
+      this.authUser = response;
+    });
+
     this.mediaIsLoading$ = this.mediaService.isLoading$.subscribe( isLoading => {
       this.mediaIsLoading = isLoading;
     });
@@ -59,10 +82,15 @@ export class MenuItemComponent implements OnInit, OnDestroy {
   
     this.menuItemService.getMenuItemBySlug(vendorSlug, itemSlug).pipe( take(1) ).subscribe( response => {
       this.menuItem = response;
+      console.log(this.menuItem);
         if(this.menuItem.itemReviews !== undefined){
         this.groupReviews(this.menuItem.itemReviews);
       }
     });
+  }
+
+  formatPrice(): string{
+    return `${getCurrencySymbol(this.menuItem.vendorItem?.currency ?? '')}${this.menuItem.vendorItem?.price ?? 0.00}` 
   }
     
   groupReviews(reviews: IVendorItemReview[]){
@@ -70,14 +98,12 @@ export class MenuItemComponent implements OnInit, OnDestroy {
 
     if (reviews.length > 0){
       
-      // Add all parent level reviews
       reviews.forEach(review => {
         if (review.parent === undefined || review.parent === null) {
           sortedReviews.push(review);
         }
       });
 
-      // Add all child reviews 
       reviews.forEach(review => {
         if(review.parent !== undefined && review.parent !== null){
           const index = sortedReviews.findIndex(x => x.id === review.parent) ?? -1;
@@ -124,8 +150,39 @@ export class MenuItemComponent implements OnInit, OnDestroy {
     }
   }
 
-  calculatedRating(){
+  calculatedRating(): number{
+    const reviews = this.menuItem.itemReviews; 
+    let totalRating = 0.0;
+    let numReviews = 0;
+
+    if(reviews !== undefined){
+      numReviews = reviews.length;
+      reviews.forEach(x => {
+        totalRating += x.rating ?? 0.0;
+      });
+    }
+    const averageRating = totalRating/numReviews;
+    return averageRating;
+  }
+
+  getRatingImage(index: number): string{
+    const average = this.calculatedRating();
     
+    if(average >= index){
+      return 'assets/images/artichoke-outline.png';
+    }else{
+      if (average <= (index - 0.75)) {
+
+        return 'assets/images/artichoke-outline-25.png';
+      }else if (average <= (index - 0.5)) {
+      
+        return 'assets/images/artichoke-outline-50.png';
+      }else if (average <= (index - 0.25)) {
+        
+        return 'assets/images/artichoke-outline-75.png';
+      }
+    }
+    return '';
   }
 
   setRating(rating: number){
@@ -153,7 +210,6 @@ export class MenuItemComponent implements OnInit, OnDestroy {
 
       
       this.activeReview.tmpMedia = this.activeReview.tmpMedia?.concat(response);
-
     });
   }
 
@@ -174,6 +230,8 @@ export class MenuItemComponent implements OnInit, OnDestroy {
 
     this.activeReview.userId = 1;
     this.activeReview.itemId = this.menuItem.vendorItem!.id
+    this.activeReview.userId = this.authUser.auth.id; 
+    this.activeReview.userProfile = this.authUser.profile;
 
     this.menuItem.itemReviews?.push(this.activeReview);
     this.menuItemService.saveReview(this.activeReview).pipe( take(1) ).subscribe( (response: IVendorItemReview) => {
@@ -181,7 +239,7 @@ export class MenuItemComponent implements OnInit, OnDestroy {
         this.menuItem.itemReviews = [];
       }
       this.menuItem.itemReviews?.push(response);
-      console.log(this.menuItem.itemReviews);
+
       this.groupReviews(this.menuItem.itemReviews!);
       this.isReviewFormVisible = false;
     });

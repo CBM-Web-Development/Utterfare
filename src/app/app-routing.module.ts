@@ -9,6 +9,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
+import { MenuItemComponent } from './components/menu-item/menu-item.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,8 @@ const routes: Routes = [
       {path: 'reset-password', component: PasswordResetComponent},
       {path: 'profile/:username', component: ProfileComponent},
       {path: 'profile', component: ProfileComponent},
-      {path: ':vendorSlug', component: VendorComponent}
+      {path: ':vendorSlug', component: VendorComponent},
+      {path: ':vendorSlug/:itemSlug', component: MenuItemComponent}
     ]
   },
   {path: '**', component: NotFoundComponent}
