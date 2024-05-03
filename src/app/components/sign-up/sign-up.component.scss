@@ -1,0 +1,22 @@
+.sign-up {
+    
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    .sign-up-form{
+        position: relative;
+        width: 100%;
+        max-width: 350px;
+        box-shadow: 2px 2px 15px rgba(0,0,0,0.3);
+        margin: 1.24em;
+        padding: 15px;
+        border-radius: 5px;
+
+        .loading-section {
+            position: absolute;
+            top: 50%; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
