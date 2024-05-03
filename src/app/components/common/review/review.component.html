@@ -1,0 +1,42 @@
+<div class="review">
+    <span class="user-info">
+        <span class="profile-picture">
+            
+            @if(review.userProfile?.profilePicture !== undefined && review.userProfile?.profilePicture !== null){
+                <img src="{{review.userProfile?.profilePicture}}"/>
+            } @else {
+                <i class="bi bi-person"></i>
+            }
+        </span>
+        <span class="user-name">
+            {{formatDisplayName(review.userProfile ?? {})}}
+        </span>
+
+    </span>
+    <span class="date">
+        {{formatDate(review.date!)}}
+    </span>
+    <span class="rating">
+        <ul>
+            <li>
+                <img src="{{review.rating! >= 1 ? 'assets/images/artichoke-outline.png' : 'assets/images/artichoke-outline-0.png'}}" />
+            </li>
+            <li>
+                <img src="{{review.rating! >= 2 ? 'assets/images/artichoke-outline.png' : 'assets/images/artichoke-outline-0.png'}}" />
+            </li>
+            <li>
+                <img src="{{review.rating! >= 3 ? 'assets/images/artichoke-outline.png' : 'assets/images/artichoke-outline-0.png'}}" />
+            </li>
+            <li>
+                <img src="{{review.rating! >= 4 ? 'assets/images/artichoke-outline.png' : 'assets/images/artichoke-outline-0.png'}}" />
+            </li>
+            <li>
+                <img src="{{review.rating! == 5 ? 'assets/images/artichoke-outline.png' : 'assets/images/artichoke-outline-0.png'}}" />
+            </li>
+        </ul>
+        <p>{{review.rating}} out of 5</p>
+    </span>
+    <span class="content">
+        {{review.content}}
+    </span>
+</div>

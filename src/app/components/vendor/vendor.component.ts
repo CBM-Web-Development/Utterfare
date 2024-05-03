@@ -1,10 +1,15 @@
-import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { IVendorProfile } from '../../lib/interfaces/ivendor-profile';
 import { VendorProfileService } from '../../lib/services/vendor-profile/vendor-profile.service';
 import { take } from 'rxjs';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { getCurrencySymbol } from '../../lib/utils/currency';
 import { Meta, Title } from '@angular/platform-browser';
+import { MenuItemService } from '../../lib/services/menu-item/menu-item.service';
+import { IMenuItem } from '../../lib/interfaces/imenu-item';
+import { IVendorItem } from '../../lib/interfaces/ivendor-item';
+import { IMenu } from '../../lib/interfaces/imenu';
+import { IVendor } from '../../lib/interfaces/ivendor';
 
 @Component({
   selector: 'app-vendor',
@@ -12,28 +17,38 @@ import { Meta, Title } from '@angular/platform-browser';
   styleUrl: './vendor.component.scss'
 })
 
-export class VendorComponent implements OnInit, OnDestroy {
+export class VendorComponent implements OnInit, OnDestroy, AfterViewInit {
   slug: string = '';
   profile: IVendorProfile = {};
   activeMenuIndex = 0;
+  allItems = '';
+  menuHeight = '400px';
+  showOverflowToggle = false;
+  background='black'
+
+  @ViewChild('menus') menus?: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
     private vendorProfileService: VendorProfileService,
     private meta: Meta,
     private router: Router,
-    private titleService: Title
+    private titleService: Title,
+    private menuItemService: MenuItemService
   ){}
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.params['vendorSlug']
     this.vendorProfileService.getVendorProfileBySlug(this.slug).pipe( take(1) ).subscribe( response => {
       this.profile = response;
+      this.checkOverflow();
       this.setMeta()
-
     });
   }
-  ngOnDestroy(): void {
+  ngAfterViewInit(): void {
+    
+    this.menus!.nativeElement;
+    
   }
   setMeta(){
     this.titleService.setTitle(`${this.profile.vendor?.name} | Utterfare` ?? 'Utterfare')
@@ -66,4 +81,21 @@ export class VendorComponent implements OnInit, OnDestroy {
 
     return `${getCurrencySymbol(currency)}${price?.toFixed(2) ?? ''}`;
   }
-}
+
+  checkOverflow(){
+    const element = this.menus!.nativeElement;
+    console.log(element.parentNode.offsetHeight);
+    this.showOverflowToggle = element.parentNode.offsetHeight > 400;
+  }
+
+  toggleMenuExpand(){
+    this.menuHeight = this.menuHeight === '400px' ? 'auto' : '400px';
+  }
+
+  navigateToItem(itemId: number){
+    const selectedItem: IVendorItem = this.profile.menuItems?.find(x => x.id === itemId)!;
+    this.router.navigate([selectedItem.slug], {relativeTo: this.route})
+  }
+  ngOnDestroy(): void {
+  }
+} 

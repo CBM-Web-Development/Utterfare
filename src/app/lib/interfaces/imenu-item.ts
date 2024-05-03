@@ -1,18 +1,11 @@
+import { IMedia } from "./imedia";
+import { IVendor } from "./ivendor";
+import { IVendorItem } from "./ivendor-item";
+import { IVendorItemReview } from "./ivendor-item-review";
+
 export interface IMenuItem {
-    id: number; 
-    vendorId: number;
-    itemName: string; 
-    itemDescription?: string; 
-    itemImage?: string; 
-    isActive: boolean;
-    isGlutenFree: boolean; 
-    isHalal: boolean; 
-    isKeto: boolean; 
-    isKosher: boolean;
-    isOrganic: boolean; 
-    isSustainable: boolean;
-    isVegan: boolean; 
-    isVegetarian: boolean; 
-    currency: string; 
-    price: number;
+    vendor?: IVendor;
+    vendorItem?: IVendorItem;
+    itemReviews?: IVendorItemReview[];
+    itemMedia?: IMedia[];
 }

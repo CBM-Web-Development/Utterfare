@@ -1,0 +1,206 @@
+
+a{
+    color: inherit;
+    text-decoration: none;;
+}
+
+.banner {
+    width: 100%;
+    background-color: rgba(0,0,0,0.3);
+    height: 300px;
+    position: relative;
+
+    .title-section {
+        align-items: center;
+        background: #f3f3f3;
+        box-shadow: 2px 2px 15px rgba(0,0,0,.3);
+        display: flex;
+        flex-direction: column;
+        height: 200px;
+        justify-content: center;
+        left: 50%;
+        padding: 1.24em;
+        max-width: 90vw;
+        position: absolute;
+        text-align: center;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: fit-content; 
+
+        @media only screen and (max-width: 900px){
+            max-width: 50vw !important;
+            width: 50vw;
+        }
+
+        .vendor-logo {
+            width: 25px;
+            background: transparent;
+            border-radius: 50px;
+        }
+
+        .subtitle {
+            color: rgba(0,0,0,0.3);
+            font-size: 1.5em;
+        }
+    }
+}
+
+.content {
+    width: 100%; 
+    max-width: 800px;
+    display:flex;
+    margin-left:auto;
+    margin-right:auto;
+    flex-direction: column;
+    align-content: center;
+
+    @media(max-width:798px) {
+        max-width: 100%;
+    }
+
+    .section {
+
+        .info{
+            display:flex;
+            flex-direction: row;
+            justify-content: space-between;
+            .rating {
+                display:flex;
+                flex-direction: row;
+                .list {
+                    padding-left: 0px !important;
+    
+                    .item {
+                        display:inline-flex;
+    
+                        .rating-item {
+                            width: 25px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .description {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .reviews-list {
+        list-style-type: none;
+        padding-left: 0px;
+
+        .children{
+            list-style-type: none;
+        }
+    }
+
+    .review-form {
+        .rating {
+            list-style-type: none;
+            padding-left: 0px;
+            cursor: pointer;
+
+            .item {
+                display: inline-block;
+
+                .rating-item {
+                    width: 50px;
+
+                    
+                }
+            }
+        }
+        .media {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            border: 1px solid #858585;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: row;
+            padding: 0px !important;
+
+
+            .upload {
+                background-color: #bababa;
+                min-width: fit-content;
+                padding: 1.24em;
+                display:flex;
+                flex-direction: column;
+                justify-content: center;
+                border-right: 1px solid #858585;
+            }
+            .items {
+                width: 100%;
+                flex-grow: 1;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                position:relative;
+
+                .loading-section {
+                    width: 100%;
+                    background: rgba(0,0,0,0.1);
+                    height: 100%;
+                    z-index: 1000;
+
+                    .loading-indicator {
+                        position: absolute;
+                        top: 50%; 
+                        left: 50%; 
+                        transform: translate(-50%, -50%);
+                    }
+                }
+
+                .placeholder-text {
+                    position:absolute;
+                    top: 50%; 
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+                .media-items {
+                    display:flex;
+                    flex-direction: row;
+                    justify-content:start;
+                    width: 100%;
+                    height: 100%;
+                    align-items: center;
+                    .item {
+                        margin: 5px;
+                        background: #858585;
+                        align-content: center;
+                        justify-content: center;
+                        position:relative;
+                        
+                        .btn-remove{
+                            display: none;
+                            position:absolute;
+                            top: 0;
+                            right: 0;
+                            z-index: 1;
+                            background: #f3f3f3;
+                            border-radius: 50px;
+
+                        }
+                        &:hover {
+                            .btn-remove{
+                                display: block;
+                            }
+                        }
+                        .thumbnail {
+                            width: 150px;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+
+
