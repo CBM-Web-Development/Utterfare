@@ -1,15 +1,38 @@
-<nav class="navbar navbar-expand bg-body-secondary">
+<nav class="navbar navbar-expand bg-body-secondary p-0">
     <div class="container-fluid">
-        <a href="https://vendor.utterfare.com" class="text-dark ms-auto">Vendor Login</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://vendor.utterfare.com">Vendor Login</a> 
+                </li>
+            </ul>
+        </div> 
     </div>
 </nav>
 <nav class="navbar navbar-expand bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="/"><img src="assets/images/Logo.png">Utterfare</a>
-        <div class="ms-auto">
-            <a [routerLink]="!isLoggedIn ? ['login'] : ['profile', currentUser.id]" class="user-profile">
-                <i class="bi bi-person"></i>
-            </a>
+        <div class="ms-auto profile">
+            <button 
+            class="btn user-profile"
+            (click)="toggleProfile()">
+                @if(authUser.profile.profilePicture !== undefined && authUser.profile.profilePicture !== null){
+                    <img src="{{authUser.profile.profilePicture}}" />
+                } @else {
+                    <i class="bi bi-person"></i>
+                }
+            </button>
+
+            <ul 
+                class="profile-dropdown"
+                [hidden]="hideDropdown">
+                @if(!isLoggedIn){
+                    <li><a class="dropdown-item" [routerLink]="['login']" >Log In</a></li>
+                } @else {
+                    <li><a class="dropdown-item" [routerLink]="['profile']" >Profile</a></li>
+                    <li><button class="dropdown-item text-danger" (click)="logout()">Log Out</button></li>
+                }
+            </ul>
         </div>
     </div>
 </nav>

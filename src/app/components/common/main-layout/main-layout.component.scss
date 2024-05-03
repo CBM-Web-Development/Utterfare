@@ -1,16 +1,44 @@
 .navbar {
     .navbar-brand {
         img {
-            width: 50px;
             margin-right: 5px;
+            width: 50px;
         }
     }
 
-    .user-profile {
-        background-color: #858585;
-        padding: 5px;
-        border-radius: 50px;
-        color: #00ced1;
+    .profile {
+        position: relative;
+        
+        &:hover {
+            cursor: pointer;
+        }
+        
+        .user-profile {
+            background-color: #858585;
+            border-radius: 25px;
+            color: #00ced1;
+        }
+
+        .profile-dropdown {
+            background-color: #f3f3f3;
+            border-radius: 5px;
+            box-shadow: 2px 5px 25px rgba(0,0,0,0.3);
+            list-style-type: none;
+            margin-top: 5px;
+            min-width: 150px;
+            padding: 5px;
+            position: absolute; 
+            right: 0;
+            width: 100%;
+            z-index: 1000;
+
+            .dropdown-item{
+                cursor: pointer;
+                &:hover {
+                    background-color: rgba(0,0,0,0.1);
+                }
+            }
+        }
     }
 }
 

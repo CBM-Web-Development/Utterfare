@@ -20,7 +20,8 @@ const routes: Routes = [
       {path: 'login', component: LoginComponent},
       {path: 'sign-up', component: SignUpComponent},
       {path: 'reset-password', component: PasswordResetComponent},
-      {path: 'profile/:id', component: ProfileComponent},
+      {path: 'profile/:username', component: ProfileComponent},
+      {path: 'profile', component: ProfileComponent},
       {path: ':vendorSlug', component: VendorComponent}
     ]
   },

@@ -20,6 +20,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { LoginComponent } from './components/login/login.component';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { LoadingIndicatorComponent } from './components/common/loading-indicator/loading-indicator.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     ProfileComponent,
     LoginComponent,
     PasswordResetComponent,
-    SignUpComponent
+    SignUpComponent,
+    LoadingIndicatorComponent
   ],
   imports: [
     BrowserAnimationsModule,
