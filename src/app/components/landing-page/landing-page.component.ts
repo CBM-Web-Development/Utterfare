@@ -22,7 +22,7 @@ export class LandingPageComponent implements OnInit, OnDestroy{
   }
 
   search(searchRequest: ISearchRequest){
-    console.log(searchRequest);
+
     this.route.navigate(['search'], {
       queryParams: 
       {

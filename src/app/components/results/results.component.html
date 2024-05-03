@@ -26,7 +26,7 @@
                     <li class="list-item">
                         <span class="image"></span>
                         <span class="information">
-                            <h4>{{ result.item.itemName }}</h4>
+                            <h4 [routerLink]="['/', result.vendor.slug, result.item.slug]">{{ result.item.itemName }}</h4>
                             <p class="vendor">
                                 <a class="name" [routerLink]="['/',result.vendor.slug]"> {{ result.vendor.name }}</a>
                                 <span class="distance"> {{ result.distance.toFixed(2) }} mi </span>
