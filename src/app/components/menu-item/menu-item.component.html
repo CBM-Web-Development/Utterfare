@@ -3,7 +3,7 @@
 
         <h1 class="title">{{menuItem.vendorItem?.itemName}}</h1>
         <h2 class="subtitle">
-            <a [routerLink]="[menuItem.vendor?.slug]">
+            <a [routerLink]="['/', menuItem.vendor?.slug]">
                 @if(menuItem.vendor?.profilePicture){
                     <img class="profile-picture" src="{{menuItem.vendor?.profilePicture}}">
                 }
@@ -17,31 +17,41 @@
     <div class="section">
         <div class="info">
             <div class="rating">
-                {{calulatedRating()}}
+                @if(menuItem.itemReviews !== undefined && menuItem.itemReviews!.length > 0){
                 <ul class="list">
                     <li class="item">
+                        
                         <img 
-                            src="assets/images/artichoke-outline.png" 
-                            class="rating-item"/>
+                            src="{{getRatingImage(1)}}" 
+                            class="rating-item"/> 
                     </li>
                     <li class="item">
-                        <img src="assets/images/artichoke-outline.png" class="rating-item"/>
+                        <img src="{{getRatingImage(2)}}" class="rating-item"/>
                     </li>
                     <li class="item">
-                        <img src="assets/images/artichoke-outline.png" class="rating-item"/>
+                        <img src="{{getRatingImage(3)}}" class="rating-item"/>
                     </li>
                     <li class="item">
-                        <img src="assets/images/artichoke-outline.png" class="rating-item"/>
+                        <img src="{{getRatingImage(4)}}" class="rating-item"/>
                     </li>
                     <li class="item">
-                        <img src="assets/images/artichoke-outline-75.png" class="rating-item"/>
+                        <img src="{{getRatingImage(5)}}" class="rating-item"/>
                     </li>
                 </ul>
+            }
                 <span class="summary">
-                    4.5 out of 5 
+                    @if(menuItem.itemReviews !== undefined && menuItem.itemReviews!.length > 0){
+                        {{calculatedRating().toFixed(2)}} out of 5
+                    } @else {
+                       <span class="placeholder-text">Not yet rated</span>
+                    }
                 </span>
             </div>
-            <div class="price">$24.99</div>
+            <div class="price">
+                @if(menuItem.vendorItem?.price !== null){
+                    {{formatPrice()}}
+                }
+            </div>
         </div>
     </div>
     <div class="section" #description>
@@ -55,7 +65,11 @@
     </div>
     <div class="section" #reviews>
         <h3>Reviews</h3>
-        <button class="btn btn-link" (click)="toggleReviewForm()">Leave a review</button>
+        @if(authUser.auth.id !== 0){
+            <button class="btn btn-link" (click)="toggleReviewForm()">Leave a review</button>
+        } @else {
+            <button class="btn btn-link" [routerLink]="['/', 'login']">Login to leave a review</button>
+        }
         @if(menuItem.itemReviews !== undefined && menuItem.itemReviews !== null && menuItem.itemReviews!.length > 0){
             <ul class="reviews-list">
                 @for(review of parsedReviews; track review.id; let reviewIndex = $index){

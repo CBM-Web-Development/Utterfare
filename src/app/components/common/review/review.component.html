@@ -9,7 +9,7 @@
             }
         </span>
         <span class="user-name">
-            {{formatDisplayName(review.userProfile ?? {})}}
+            {{formatDisplayName(review.userProfile!)}}
         </span>
 
     </span>
@@ -36,6 +36,7 @@
         </ul>
         <p>{{review.rating}} out of 5</p>
     </span>
+    <h5>{{review.title}}</h5>
     <span class="content">
         {{review.content}}
     </span>

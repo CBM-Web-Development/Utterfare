@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { IUser } from '../../../lib/interfaces/iuser';
 import { IAuthUser } from '../../../lib/interfaces/iauth-user';
 import { Router, ActivatedRoute } from '@angular/router';
+import { props, select, Store } from '@ngrx/store';
+import { resetUserAuth, setUserAuth } from '../../../lib/stores/UserAuth/userauth.actions';
 
 @Component({
   selector: 'app-main-layout',
@@ -28,13 +30,16 @@ export class MainLayoutComponent implements OnInit {
 
   constructor(
     private router: Router, 
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private store: Store<{userAuth: IAuthUser}>
   ){}
   
   ngOnInit(){
+
     if(localStorage.getItem('authUser') !== null){
       this.authUser = JSON.parse(localStorage.getItem('authUser') ?? '{}');
       this.isLoggedIn = this.authUser.profile.id !== undefined && this.authUser.profile.id !== 0;
+      this.store.dispatch(setUserAuth({payload: this.authUser}));
     }
   }
 
@@ -47,6 +52,7 @@ export class MainLayoutComponent implements OnInit {
   }
 
   logout(){
+    this.store.dispatch(resetUserAuth());
     localStorage.clear();
     this.isLoggedIn = false; 
     this.authUser = {
