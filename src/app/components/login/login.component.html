@@ -1,0 +1,22 @@
+<div class="login">
+    <form [formGroup]="signInFormGroup" class="login-form" (submit)="signIn()">
+        <h1>Login</h1>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" placeholder="username" formControlName="username" required/>
+            <label>Username</label>
+            @if(errorExists('username')){
+                <p class="form-text text-danger">{{getErrorMsg('username')}}</p>
+            }
+        </div>
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" placeholder="username" formControlName="password" required/>
+            <label>Password</label>
+            @if(errorExists('password')){
+                <p class="form-text text-danger">{{getErrorMsg('password')}}</p>
+            }
+        </div>
+        <button type="submit" class="btn btn-primary">Sign In</button>
+        <a [routerLink]="['/', 'sign-up']">Sign Up</a>
+        <a [routerLink]="['/', 'reset-password']">Reset Password</a>
+    </form>
+</div>

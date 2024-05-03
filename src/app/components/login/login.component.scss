@@ -1,0 +1,26 @@
+.login {
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    align-content: center;
+
+    .login-form{
+        margin: 1.24em;
+        width: 100%;
+        max-width: 300px;
+        border-radius: 5px;
+        box-shadow: 2px 2px 25px #e8e8e8;
+        min-height: 300px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 1.24em;
+
+        .ng-touched {
+            &.ng-invalid{
+                border-color: red;
+            }
+        }
+    }
+}
