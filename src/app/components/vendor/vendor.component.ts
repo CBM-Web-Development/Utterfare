@@ -24,7 +24,7 @@ export class VendorComponent implements OnInit, OnDestroy, AfterViewInit {
   allItems = '';
   menuHeight = '400px';
   showOverflowToggle = false;
-  background='black'
+  background='#ffffff'
 
   @ViewChild('menus') menus?: ElementRef;
 
