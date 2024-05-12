@@ -24,7 +24,9 @@ import { LoadingIndicatorComponent } from './components/common/loading-indicator
 import { MenuItemComponent } from './components/menu-item/menu-item.component';
 import { ReviewComponent } from './components/common/review/review.component';
 import { StoreModule } from '@ngrx/store';
-import { userAuthReducer } from './lib/stores/UserAuth/userauth.reducer';
+import { userAuthKey, userAuthReducer } from './lib/stores/UserAuth/userauth.reducer';
+import { locationKey, locationReducer } from './lib/stores/Location/location.reducer';
+import { ItemCardComponent } from './components/common/item-card/item-card.component';
 
 
 @NgModule({
@@ -42,7 +44,8 @@ import { userAuthReducer } from './lib/stores/UserAuth/userauth.reducer';
     SignUpComponent,
     LoadingIndicatorComponent,
     MenuItemComponent,
-    ReviewComponent
+    ReviewComponent,
+    ItemCardComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -54,7 +57,9 @@ import { userAuthReducer } from './lib/stores/UserAuth/userauth.reducer';
     HttpClientModule,
     NgbModule,
     ToastrModule.forRoot(),
-    StoreModule.forRoot({userAuth: userAuthReducer}, {})
+    StoreModule.forRoot(),
+    StoreModule.forFeature(locationKey, locationReducer),
+    StoreModule.forFeature(userAuthKey, userAuthReducer)
   ],
   providers: [],
   bootstrap: [AppComponent]

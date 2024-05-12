@@ -4,4 +4,72 @@
         <h1>Find what you're craving</h1>
        <app-search [getCurrentLocationOnLoad]="true" (submit)="search($event)"></app-search>
     </div>
+    <div class="section local">
+        <h2 class="title">What's Nearby</h2>
+        <div class="items">
+            @if(isLoadingLocal === true){
+                @for(placeholder of placeholders; track placeholder){
+                    <div class="item">
+                        <div class="card g-0" aria-hidden="true">
+                            <span class="item-img card-img-top placeholder"></span>
+                            <div class="card-body">
+                                <h5 class="card-title placeholder-glow">
+                                    <span class="placeholder col-6"></span>
+                                </h5>
+                                <p class="card-text placeholder-glow">
+                                    <span class="placeholder col-7"></span>
+                                    <span class="placeholder col-4"></span>
+                                    <span class="placeholder col-4"></span>
+                                    <span class="placeholder col-6"></span>
+                                    <span class="placeholder col-8"></span>
+                                </p>
+                                <a class="btn btn-primary disabled placeholder col-6" aria-disabled="true"></a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            @for(localItem of localItems; track localItem.item.id; let localItemIndex = $index){
+                <app-item-card [menuItem]="localItem"></app-item-card>
+            }
+        </div>
+    </div>
+    <div class="section new-items">
+        <h2 class="title">New Food</h2>
+        <div class="items">
+            @if(isLoadingNewItems === true){
+                @for(placeholder of placeholders; track placeholder){
+                    <div class="item">
+                        <div class="card g-0" aria-hidden="true">
+                            <span class="item-img card-img-top placeholder"></span>
+                            <div class="card-body">
+                                <h5 class="card-title placeholder-glow">
+                                    <span class="placeholder col-6"></span>
+                                </h5>
+                                <p class="card-text placeholder-glow">
+                                    <span class="placeholder col-7"></span>
+                                    <span class="placeholder col-4"></span>
+                                    <span class="placeholder col-4"></span>
+                                    <span class="placeholder col-6"></span>
+                                    <span class="placeholder col-8"></span>
+                                </p>
+                                <a class="btn btn-primary disabled placeholder col-6" aria-disabled="true"></a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            } @else {
+                @for(newItem of newItems; track newItem.item.id; let newItemIndex = $index){
+                    <app-item-card [menuItem]="newItem"></app-item-card>
+                }
+            }
+        </div>
+    </div>
+    <div class="section popular-items">
+        <h2 class="title">What's Popular?</h2>
+        <div class="d-flex flex-column align-items-center w-100">
+            <p class="fs-3">We need more reviews!</p>
+            <p><a [routerLink]="['/','login']">Login</a> and review your favorite food!</p>
+        </div>
+    </div>
 </div>

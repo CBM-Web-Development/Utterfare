@@ -19,3 +19,42 @@
     }
     
 }
+.section {
+    width: 100%;
+
+    .title {
+        text-align: center;
+    }
+    .items {
+        list-style-type: none;
+        padding-left: 0px !important;
+        display:flex;
+        flex-direction: row;
+        justify-content:space-evenly;
+        overflow: auto;
+        
+        .item {
+            min-width: 250px;
+            margin: 1.24em;
+
+            .img-placeholder {
+                position: relative;
+                p {
+                    position:absolute;
+                    top: 50%; 
+                    left: 50%; 
+                    transform: translate(-50%, -50%);
+                    z-index: 1000;
+                    color: #f8f8f8;
+                    text-align: center;
+                }
+            }
+        }
+    }
+    
+    .local {
+        width: 100%;
+    
+    }
+
+}

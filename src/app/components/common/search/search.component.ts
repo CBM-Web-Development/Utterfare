@@ -4,6 +4,8 @@ import { ILocation } from '../../../lib/interfaces/ilocation';
 import { ISearchRequest } from '../../../lib/interfaces/isearch-request';
 import { Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { setLocation } from '../../../lib/stores/Location/location.actions';
 
 @Component({
   selector: 'app-search',
@@ -31,6 +33,7 @@ export class SearchComponent implements OnInit{
     private titleService: Title,
     private router: Router, 
     private meta: Meta,
+    private store: Store
   ){}
 
   ngOnInit(){
@@ -71,6 +74,10 @@ export class SearchComponent implements OnInit{
         const lng = position.coords.longitude;
         this.location.latitude = lat; 
         this.location.longitude = lng; 
+        const userLocation: ILocation = {};
+        userLocation.latitude = this.location.latitude; 
+        userLocation.longitude = this.location.longitude
+        this.store.dispatch(setLocation({payload: userLocation}))
 
         let geocoder = new google.maps.Geocoder();
         let latlng = new google.maps.LatLng(lat, lng);
