@@ -17,6 +17,8 @@ export const initialState: IAuthUser = {
     }
 };
 
+export const userAuthKey = 'userAuth';
+
 export const userAuthReducer = createReducer(
     initialState, 
     on(setUserAuth, (state, {payload}) => state = payload), 

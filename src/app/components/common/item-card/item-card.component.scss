@@ -1,0 +1,33 @@
+.item {
+    min-width: 250px;
+    margin: 1.24em;
+
+    .img-placeholder {
+        position: relative;
+        p {
+            position:absolute;
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            color: #f8f8f8;
+            text-align: center;
+        }
+    }
+}
+
+.card {
+    .item-img {
+        width: 100%;
+        min-height: 150px;
+
+        img {
+            width: 100%; 
+            height: inherit;
+            max-width: 150px;
+            display: block;
+            margin-left: auto; 
+            margin-right: auto;
+        }
+    }
+}

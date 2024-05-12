@@ -1,0 +1,28 @@
+<div class="item">
+    <div class="card h-100 g-0" [routerLink]="['/', menuItem.vendor.slug, menuItem.item.slug]">
+        @if(!menuItem.item.itemImage && !menuItem.vendor.profilePicture) {
+            <span class="item-img card-img-top placeholder img-placeholder">
+                <p>No Media Found</p>
+            </span>
+        } @else {
+            <div class="item-img card-img-top">
+                <img src="{{menuItem.item.itemImage ?? menuItem.vendor.profilePicture}}" (error)="updateUrl($event)" alt="{{menuItem.item.itemName}}" />
+            </div>
+            }
+        <div class="card-body w-100 g-0" >
+            <h5 class="card-title" [routerLink]="['/', menuItem.vendor.slug, menuItem.item.slug]">{{ menuItem.item.itemName }}</h5>
+            <div class="card-text g-1">
+                <p class="vendor d-flex flex-column" [routerLink]="['/', menuItem.vendor.slug]">
+                    <span class="name">{{ menuItem.vendor.name }}</span>
+                    @if(menuItem.distance){
+                        <span class="distance text-hint">{{menuItem.distance?.toFixed(2)}} mi</span>
+                    }
+                </p>
+                @if(menuItem.item.price){
+                    <p class="price">{{currencySymbol(menuItem.item.currency!)}}{{menuItem.item.price}}</p>
+                }
+                <p class="description">{{ menuItem.item.itemDescription }}</p>
+            </div>
+        </div>
+    </div>
+</div>
