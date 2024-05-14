@@ -10,7 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MainLayoutComponent } from './components/common/main-layout/main-layout.component';
 import { VendorComponent } from './components/vendor/vendor.component';
 import { ToastrModule } from 'ngx-toastr';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { NotFoundComponent } from './components/common/not-found/not-found.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -27,6 +27,8 @@ import { StoreModule } from '@ngrx/store';
 import { userAuthKey, userAuthReducer } from './lib/stores/UserAuth/userauth.reducer';
 import { locationKey, locationReducer } from './lib/stores/Location/location.reducer';
 import { ItemCardComponent } from './components/common/item-card/item-card.component';
+import { authInterceptor } from './lib/interceptors/auth.interceptor';
+import { FeedItemComponent } from './components/common/feed-item/feed-item.component';
 
 
 @NgModule({
@@ -45,7 +47,8 @@ import { ItemCardComponent } from './components/common/item-card/item-card.compo
     LoadingIndicatorComponent,
     MenuItemComponent,
     ReviewComponent,
-    ItemCardComponent
+    ItemCardComponent,
+    FeedItemComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -61,7 +64,11 @@ import { ItemCardComponent } from './components/common/item-card/item-card.compo
     StoreModule.forFeature(locationKey, locationReducer),
     StoreModule.forFeature(userAuthKey, userAuthReducer)
   ],
-  providers: [],
+  providers: [
+    provideHttpClient(
+      withInterceptors([authInterceptor])
+    )
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

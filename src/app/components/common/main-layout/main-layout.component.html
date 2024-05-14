@@ -27,9 +27,16 @@
                 class="profile-dropdown"
                 [hidden]="hideDropdown">
                 @if(!isLoggedIn){
-                    <li><a class="dropdown-item" [routerLink]="['login']" >Log In</a></li>
+                    <li><a class="dropdown-item" [routerLink]="['/login']">Log In</a></li>
                 } @else {
-                    <li><a class="dropdown-item" [routerLink]="['profile']" >Profile</a></li>
+                    <li>
+                        <a 
+                            class="dropdown-item" 
+                            [routerLink]="['/profile', authUser.auth.username]" 
+                            (click)="hideDropdown = true">
+                            Profile
+                        </a>
+                    </li>
                     <li><button class="dropdown-item text-danger" (click)="logout()">Log Out</button></li>
                 }
             </ul>

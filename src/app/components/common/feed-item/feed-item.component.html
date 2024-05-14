@@ -1,0 +1,31 @@
+<div class="feed-item">
+    <div class="header">
+        <div class="information">
+            <span 
+            class="item-name" 
+            [routerLink]="['/',feedItem.vendor?.slug, feedItem.item?.slug]">
+            {{ feedItem.item?.itemName }}
+        </span>
+        <span 
+            class="vendor"
+            [routerLink]="['/', feedItem.vendor?.slug]">
+            {{ feedItem.vendor?.name }}
+        </span>
+        </div>
+        <div class="rating">
+            <ul class="rating-list">
+                @for(r of rating; track r; let ratingIndex = $index){
+                    @if(feedItem.rating! >= (ratingIndex + 1)){
+                        <li class="item"><img src="/assets/images/artichoke-outline.png" /></li>
+                    } @else {
+                        <li class="item"><img src="/assets/images/artichoke-outline-0.png" /></li>
+                    }
+                }
+            </ul>
+            {{ feedItem.rating }} out of 5
+        </div>
+    </div>
+    <div class="body">
+        <p>{{ feedItem.content }}</p>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+.profile {
+    max-width: 800px;
+    display:block;
+    margin: auto;
+    padding: 1.24em;
+
+    .banner {
+        display: flex;
+        flex-direction: row;
+        border-bottom: 1px solid rgba(0,0,0,0.2);
+        padding: 1.24em;
+
+        .profile-picture { 
+            border-radius: 150px;
+
+            &__img{
+                width: 150px;
+                border-radius: 150px;
+                background-color: rgba(0,0,0,0.2);
+                
+            }
+        }
+        .information {
+            display:flex;
+            flex-grow: 1;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+
+            .data {
+                display:flex;
+                flex-direction: row;
+                justify-content: space-between;
+                .item {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    margin: 0px 1.24em 0px 1.24em
+                }
+            }
+
+            .buttons{
+                button {
+                    margin: 0px 0.24em 0px 0.24em
+                }
+            }
+        }
+    }
+
+    .body {
+        min-height: 300px;
+
+        .feed {
+            list-style-type: none;
+            padding-left: 0px;
+        }
+    }
+}
