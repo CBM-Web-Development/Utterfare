@@ -1,0 +1,41 @@
+<div class="edit-profile">
+    <form [formGroup]="profileFormGroup" class="mb-3" (submit)="saveProfileChanges()">
+        <div class="profile-picture" (click)="profilePictureFileUpload.click()">
+            <img class="image" src="{{profile.profilePicture}}" (error)="profile.profilePicture = '/assets/images/Logo.png'"/>
+            <input #profilePictureFileUpload type="file" (change)="handleFileUpload($event)" hidden/>
+            <span class="mask"></span>
+            <span>Change Photo</span>
+            <app-loading-indicator [isLoading]="profilePictureLoading"></app-loading-indicator>
+        </div>
+        <fieldset>
+            <legend>Personal Details</legend>
+            <div class="row mb-3">
+                <div class="col form-floating">
+                    <input type="text" class="form-control" formControlName="firstName" placeholder="First Name"/>
+                    <label>First Name</label>
+                </div>
+                <div class="col form-floating">
+                    <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name"/>
+                    <label>Last Name</label>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="date" class="form-control" formControlName="birthday" placeholder="Birthday"/>
+                <label>Birthday</label>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Contact Details</legend>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" formControlName="emailAddress" placeholder="Email Address"/>
+                <label>Email Address</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="tel" class="form-control" formControlName="phoneNumber" placeholder="Phone Number"/>
+                <label>Phone Number</label>
+            </div>
+        </fieldset>
+        <button type="submit" class="btn btn-primary w-100" [disabled]="profileFormGroup.invalid">Save Profile</button>
+        <app-loading-indicator [isLoading]="isLoadingProfile"></app-loading-indicator>
+    </form>
+</div>

@@ -1,0 +1,11 @@
+<h4 class="w-100 text-center">{{title}}</h4>
+<ul class="followers-list list-group">
+    @for(connection of connections; track connection.profile.id){
+        <li class="list-group-item">
+            <div class="user">
+                <img src="{{connection.profile.profilePicture}}" class="profile-picture" (error)="handleImgError($event)"/>
+                {{parseDisplayName(connection)}}
+            </div>
+        </li>
+    }
+</ul>

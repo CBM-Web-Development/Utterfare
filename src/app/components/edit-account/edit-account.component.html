@@ -1,0 +1,68 @@
+<div class="account">
+    <form [formGroup]="accountFormGroup">
+        <fieldset><h4>Account Details</h4></fieldset>
+        <div class="details mb-3">
+            <div class="detail">
+                <label>User ID</label>
+                {{authUser.auth.id}}
+            </div>
+            <div class="detail">
+                <label>Account Type</label>
+                {{authUser.auth.type[0].toUpperCase()}}{{authUser.auth.type.substr(1).toLowerCase()}}
+            </div>
+            <div class="detail">
+                <label>Member Since</label>
+                <i>Coming Soon</i>
+            </div>
+
+        </div>
+        <div class="form-floating">
+        </div>
+        <fieldset><h4>Login Preferences</h4></fieldset>
+        <div class="login-preferences mb-3">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" placeholder="username" formControlName="username">
+                <label>Username</label>
+                @if(usernameIsInvalid()){
+                    <p class="text-danger">Username already exists</p>
+                }
+            </div>
+            <button type="button" class="btn btn-primary w-100" (click)="openResetModal()">Reset Password</button>
+        </div>
+    </form>
+    <div class="actions sticky-lg-top">
+        <h4>Actions</h4>
+        <button type="submit" class="btn btn-outline-success mb-3 w-100" [disabled]="accountFormGroup.invalid || errors.length > 0">Save Changes</button>
+        <button type="submit" class="btn btn-outline-danger w-100">Delete Account</button>
+    </div>
+</div>
+
+<ng-template #passwordResetModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Password Reset</h5>
+        <button type="button" class="btn-close" (click)="modal.dismiss()"></button>
+    </div>
+    <div class="modal-body">
+        <form class="" [formGroup]="passwordResetFormGroup" (submit)="savePassword()">
+            <fieldset>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" formControlName="currentPassword" placeholder="Current Password">
+                    <label>Current Password</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" formControlName="newPassword" placeholder="New Password">
+                    <label>New Password</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" formControlName="confirmNewPassword" placeholder="Confirm New Password">
+                    <label>Confirm New Password</label>
+                </div>
+                @if(!isPasswordValid()){
+                    <p class="text-danger">Passwords do not match</p>
+                }
+                <app-loading-indicator [isLoading]="isLoadingPasswordUpdate"></app-loading-indicator>
+            </fieldset>
+            <button type="submit" class="btn btn-primary w-100" [disabled]="passwordResetFormGroup.invalid && isPasswordValid()">Change Password</button>
+        </form>
+    </div>
+</ng-template>

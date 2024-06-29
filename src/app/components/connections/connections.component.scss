@@ -1,0 +1,22 @@
+.followers-list{
+    max-height: 400px;
+    overflow-y: scroll;
+
+    .list-group-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .user {
+            display:flex; 
+            flex-direction: row; 
+
+            .profile-picture {
+                width: 100%;
+                max-width: 25px;
+                border-radius: 25px;
+                margin-right: 5px;
+                background-color: rgba(0,0,0,0.1);
+            }
+        }
+    }
+}
