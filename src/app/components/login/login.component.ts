@@ -56,13 +56,12 @@ export class LoginComponent implements OnInit {
     }
 
     this.authenticationService.authenticate(this.user).pipe( take(1) ).subscribe( (response: IAuthUser) => {
-      
       localStorage.setItem("authUser", JSON.stringify(response));
       this.store.dispatch(setUserAuth({payload: response}));
       if(this.isModal){
         this.signInEmitter.emit(true);
       } else {
-        this.router.navigate(['/profile']);
+        this.router.navigate(['/','profile', response.auth.username]);
       }
     })
   }

@@ -10,6 +10,8 @@ import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
 import { MenuItemComponent } from './components/menu-item/menu-item.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { EditAccountComponent } from './components/edit-account/edit-account.component';
 
 const routes: Routes = [
   {
@@ -21,7 +23,9 @@ const routes: Routes = [
       {path: 'login', component: LoginComponent},
       {path: 'sign-up', component: SignUpComponent},
       {path: 'reset-password', component: PasswordResetComponent},
+      {path: 'profile/edit', component: EditProfileComponent},
       {path: 'profile/:username', component: ProfileComponent},
+      {path: 'account', component: EditAccountComponent},
       {path: ':vendorSlug', component: VendorComponent},
       {path: ':vendorSlug/:itemSlug', component: MenuItemComponent}
     ]

@@ -44,9 +44,11 @@ export class MainLayoutComponent implements OnInit {
   }
 
   toggleProfile(){
+    
     if(this.isLoggedIn){
       this.hideDropdown = !this.hideDropdown;
     }else {
+      this.hideDropdown = true;
       this.router.navigate(['/','login'])
     }
   }
@@ -68,5 +70,6 @@ export class MainLayoutComponent implements OnInit {
       userId: 0, 
       emailAddress: ''
     }};
+    this.router.navigate(['/','login']);
   }
 }

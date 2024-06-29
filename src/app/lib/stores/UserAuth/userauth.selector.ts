@@ -7,7 +7,5 @@ export const userAuthSelect = createFeatureSelector<IAuthUser>(userAuthKey);
 
 export const selectUser = createSelector(
     userAuthSelect,
-    (state: IAuthUser) => {
-        return state;
-    }
+    (state: IAuthUser) => state
 )

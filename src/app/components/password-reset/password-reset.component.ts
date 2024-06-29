@@ -76,7 +76,7 @@ export class PasswordResetComponent implements OnInit, AfterViewInit ,OnDestroy 
     }
     
     this.resetCodeFormGroup.controls.resetCode.disable();
-    this.user.username = 'cottonmalone40';
+   // this.user.username = 'cottonmalone40';
     this.authenticationService.passwordResetCodeValidation(this.user.username!, this.user.resetCode!).pipe( take(1) ).subscribe( response => {
       if(response === true){
         this.resetCodeFormGroup.controls.resetCode.enable();

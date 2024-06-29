@@ -10,6 +10,7 @@ import { userAuthSelect } from '../../lib/stores/UserAuth/userauth.selector';
 import { ProfileService } from '../../lib/services/profile/profile.service';
 import { IVendorItemReview } from '../../lib/interfaces/ivendor-item-review';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { IProfileConnectionResponse } from '../../lib/interfaces/iprofile-connection-response';
 
 @Component({
   selector: 'app-profile',
@@ -25,6 +26,8 @@ export class ProfileComponent implements OnInit, OnDestroy{
   feedItems: IFeedItem[] = [];
   reviews: IVendorItemReview[] = [];
   username: string = '';
+  followers: IProfileConnectionResponse[] = [];
+  following: IProfileConnectionResponse[] = [];
 
   profile: IProfile = {
     id: -1,
@@ -48,11 +51,11 @@ export class ProfileComponent implements OnInit, OnDestroy{
   }
   
   @ViewChild('loginModal') loginModal!: TemplateRef<any>;
+  @ViewChild('followingModal') followingModal!: TemplateRef<any>;
+  @ViewChild('followersModal') followersModal!: TemplateRef<any>;
 
   constructor(
     private activatedRoute: ActivatedRoute, 
-    private router: Router,
-    private authService: AuthenticationService,
     private store: Store,
     private profileService: ProfileService,
     private modalService: NgbModal
@@ -78,16 +81,28 @@ export class ProfileComponent implements OnInit, OnDestroy{
       this.isLoadingReviews = res;
     });
 
+
     this.store.select(userAuthSelect).subscribe( authUserRes => {
       this.authUser = authUserRes;    
 
       this.profileService.getProfile(this.username!).pipe( take(1) ).subscribe( res => {
         this.profile = res;
+
+
+        this.profileService.getFollowers(this.profile.id).pipe(take(1)).subscribe( res => {
+          this.followers = res;
+        });
+
+        this.profileService.getFollowing(this.profile.id).pipe(take(1)).subscribe( res => {
+          this.following = res;
+        });
+
         if(this.authUser.auth.id !== 0){
           this.profileService.getReviews(this.profile.id).pipe( take(1) ).subscribe( (res: IFeedItem[]) => {
             this.feedItems = res;
           });
         }
+
       });
 
     });
@@ -98,8 +113,44 @@ export class ProfileComponent implements OnInit, OnDestroy{
   }
 
   signIn(event: Event){
-    console.log(event);
     this.modalService.dismissAll();
+  }
+
+  isFollowing(): boolean{
+    return this.followers.findIndex(x => x.profile.id === this.authUser.profile.id) > -1;
+  }
+
+  isFriends(): boolean {
+    return this.isFollowing() && this.following.findIndex( x=> x.profile.id === this.authUser.profile.id) > -1;
+  }
+
+  displayFollowing(){
+    this.modalService.open(this.followingModal);
+  }
+
+  displayFollowers(){
+    this.modalService.open(this.followersModal);
+  }
+
+  followProfile(){
+    const profileId = this.profile.id;
+    const followerId = this.authUser.profile.id;
+    
+    this.profileService.follow(profileId, followerId).pipe( take(1) ).subscribe(res => {
+      const connection: IProfileConnectionResponse = {
+        connection: res,
+        profile: this.authUser.profile
+      }
+      this.followers.push(connection);
+    })
+  }
+
+  unfollowProfile(){
+    const profileId = this.profile.id;
+    const followerId = this.authUser.profile.id;
+    this.profileService.unfollow(profileId, followerId).pipe( take(1) ).subscribe( res => {
+      this.followers = this.followers.filter(x => x.profile.id !== followerId );
+    });
   }
 
   ngOnDestroy(): void {

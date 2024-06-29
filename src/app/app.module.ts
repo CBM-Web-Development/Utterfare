@@ -29,6 +29,9 @@ import { locationKey, locationReducer } from './lib/stores/Location/location.red
 import { ItemCardComponent } from './components/common/item-card/item-card.component';
 import { authInterceptor } from './lib/interceptors/auth.interceptor';
 import { FeedItemComponent } from './components/common/feed-item/feed-item.component';
+import { ConnectionsComponent } from './components/connections/connections.component';
+import { EditAccountComponent } from './components/edit-account/edit-account.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 
 @NgModule({
@@ -48,7 +51,10 @@ import { FeedItemComponent } from './components/common/feed-item/feed-item.compo
     MenuItemComponent,
     ReviewComponent,
     ItemCardComponent,
-    FeedItemComponent
+    FeedItemComponent,
+    ConnectionsComponent,
+    EditAccountComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserAnimationsModule,

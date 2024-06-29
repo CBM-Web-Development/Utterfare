@@ -18,12 +18,12 @@ export class LoadingIndicatorComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     
-    if(this.position !== undefined && this.position !== null){
+    if(this.position === undefined || this.position === null){
       this.loadingIndicator?.nativeElement.classList.add('center');
     }
-    if(this.isLoading !== undefined){
-      this.loadingIndicator.nativeElement.setAttribute('hidden', !this.isLoading);
-    }
+
+    this.loadingIndicator.nativeElement.style.display = this.isLoading === true ? 'block' : 'none';
+
   }
 
   

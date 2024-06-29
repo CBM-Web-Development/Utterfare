@@ -10,3 +10,4 @@ export const MEDIA_ROUTE = `${BASE}/media`;
 export const USER_ROUTE = `${BASE}/users`;
 export const PROFILE_ROUTE = `${BASE}/profile`;
 export const FEED_ROUTE = `${PROFILE_ROUTE}/feed`;
+export const FOLLOWERS_ROUTE = `${PROFILE_ROUTE}/followers`;

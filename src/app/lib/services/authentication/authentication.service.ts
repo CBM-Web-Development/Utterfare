@@ -61,11 +61,12 @@ export class AuthenticationService {
   passwordReset(user: IUser): Observable<boolean>{
     const success = this.httpClient.post<boolean>(`${USER_ROUTE}/password-reset/set-password`, user)
       .pipe( map((response: boolean) => {
-        console.log(response);
+
         return response;
       }), catchError(error => {
         console.error(error);
-        this.toastr.error("Error resetting password. Please try again.")
+        this.toastr.error("Error resetting password. Please try again.");
+
         return EMPTY;
       }));
 
