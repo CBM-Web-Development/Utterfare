@@ -1,0 +1,42 @@
+.feed-item{
+    .header {
+        display: flex; 
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        .information {
+            display: flex;
+            flex-direction: column;
+            .item-name {
+                font-weight: 600;
+                cursor: pointer;
+            }
+    
+            .vendor {
+                cursor: pointer;
+                font-style: italic;
+            }
+        }
+
+        .rating {
+            display: flex; 
+            flex-direction: column;
+            align-items: center;
+    
+            .rating-list {
+                list-style-type: none;
+                padding-left: 0px !important;
+                .item {
+                    display:inline-block;
+    
+                    img {
+                        width: 25px;
+                    }
+                }
+            }
+        }
+    }
+
+    
+}

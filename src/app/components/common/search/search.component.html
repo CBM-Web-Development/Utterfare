@@ -1,0 +1,54 @@
+<form 
+    [class]="classes.join(' ')"
+    [formGroup]="searchFormGroup" 
+    (submit)="doSearchEvt()"
+    >
+    <div class="terms-section">
+        <label>What're you craving?</label>
+        <input 
+            type="text" 
+            class="form-control" 
+            formControlName="searchTerms"
+            placeholder="Specific menu item, cuisine, restaurant"/>
+    </div>
+    <div class="location-section">
+        <label>Location</label>
+        <div class="location">
+            <button 
+                type="button" 
+                class="btn btn-link btn-find-location"
+                placement="top" 
+                ngbTooltip="Use my current location."
+                (click)="getCurrentLocation()">
+                @if(isLoadingCurrentLocation){
+                    <div class="spinner-border spinner-border-sm" role="status"></div>
+                }@else {
+                    <i class="bi bi-crosshair"></i>
+                }
+            </button>
+            <input 
+            type="text" 
+            class="form-control shadow-none" 
+            formControlName="searchLocation"
+            placeholder="Address"
+            [(ngModel)]="locationAutocompleteInput"
+            #addressText
+            />
+        </div>
+        
+    </div>
+    <div class="distance-section">
+        <label>Distance</label>
+        <select 
+            aria-label="searchRadius"
+            class="form-select"
+            formControlName="searchRadius">
+            @for(distance of distances; track distance;){
+                <option value="{{distance}}">{{distance}} mi</option>
+            }
+        </select>
+    </div>
+    <div class="search-section">
+        <button type="submit" class="btn btn-search" [disabled]="this.searchFormGroup.invalid || this.errors.length > 0"><i class="bi bi-search"></i></button>
+    </div>
+</form>

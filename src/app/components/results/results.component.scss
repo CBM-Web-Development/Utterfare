@@ -1,0 +1,108 @@
+.results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .options {
+        display:flex;
+        flex-direction: row;
+        justify-content: end;
+        align-content: space-between;
+        width: 100%;
+        max-width: 800px;
+    }
+
+    .search-results {
+        display:flex;
+        flex-direction: column;
+        min-height: 400px;
+        width: 100%;
+        max-width: 800px;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+
+        .list {
+            list-style-type: none;
+            padding-left: 0px !important;
+
+            .list-item {
+                width: 100%;
+                display:flex;
+                flex-direction: row; 
+                border-bottom: 2px solid transparent; 
+                border-image: linear-gradient(0.25turn, #f3f3f3,  #8e8e8e, #8e8e8e, #f3f3f3);
+                border-image-slice: 1; 
+                margin-bottom: 24px;
+
+                @media(max-width: 798px), screen and (orientation: portrait){
+                    flex-direction: column;
+                }
+
+                &:last-of-type {
+                    border-bottom: none;
+                }
+                .information {
+                    width: 100%;
+                    flex-grow: 1;
+                    display:flex; 
+                    flex-direction: column;
+
+                    .vendor {
+                        display:flex; 
+                        flex-direction: row;
+                        justify-content: space-between;
+
+
+                        .name {
+                            font-style: italic;
+                            width: 100%; 
+                            flex-grow: 1;
+                            color: #808080;
+                            text-decoration: none;
+
+                            &:hover {
+                                text-decoration: underline;
+                            }
+                        }
+                        .distance {
+                            width: fit-content;
+                            text-wrap: nowrap;
+                            text-align: end;
+                        }
+                    }
+                }
+                .image {
+                    min-width: 150px;
+                    width: 150px;
+                    flex-grow: 1;
+                }
+
+                .price{
+                    min-width: 75px;
+                    width: 75px;
+                    flex-grow: 1;
+                }
+            }
+        }
+
+        .pagination {
+            display: flex;
+            flex-direction: row;
+            margin-left: auto;
+            margin-right: auto;
+            width: fit-content;
+
+            .btn-link {
+                color: #808080;
+                text-decoration: none;
+                
+                &.active {
+                    text-decoration: underline;
+                    font-style: italic;
+                    color: #000;
+                }
+            }
+        }
+    }
+}
