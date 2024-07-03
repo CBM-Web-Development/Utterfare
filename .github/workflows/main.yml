@@ -31,5 +31,5 @@ jobs:
         server: gator4070.hostgator.com
         username: cmeehan
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./dist/browser
+        local-dir: ./dist/browser/
         server-dir: utterfare.com,
