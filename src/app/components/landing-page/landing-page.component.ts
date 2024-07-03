@@ -53,7 +53,7 @@ export class LandingPageComponent implements OnInit, OnDestroy{
   }
 
   search(searchRequest: ISearchRequest){
-
+  
     this.route.navigate(['search'], {
       queryParams: 
       {
@@ -62,6 +62,7 @@ export class LandingPageComponent implements OnInit, OnDestroy{
         location: JSON.stringify(searchRequest.location)
       }
     });
+    
   }
 
   ngOnDestroy(): void {
