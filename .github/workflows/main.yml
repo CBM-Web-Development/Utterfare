@@ -21,6 +21,10 @@ jobs:
     - name: Install dependencies
       run: npm install 
 
+    - name: Create build dir
+      run: | 
+         mkdir -p ./dist/browser && cp -R dist ./build/browser ls ./build/browser
+
     - name: Build
       run: npm run build:prod
 
