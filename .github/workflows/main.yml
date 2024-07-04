@@ -35,5 +35,5 @@ jobs:
         username: cmeehan
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./dist/utterfare/browser/
-        server-dir: ./public_html
+        server-dir: ./public_html/
         state-name: ./.sync-state.json
