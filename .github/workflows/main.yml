@@ -23,7 +23,7 @@ jobs:
 
     - name: Create build dir
       run: | 
-         mkdir -p ./dist/browser && cp -R dist ./build/browser ls ./build/browser
+         mkdir -p ./dist/utterfare/browser && cp -R dist ./dist/utterfare/browser ls ./dist/utterfare/browser
 
     - name: Build
       run: npm run build:prod
