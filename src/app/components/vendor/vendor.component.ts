@@ -64,13 +64,12 @@ export class VendorComponent implements OnInit, OnDestroy, AfterViewInit {
     section.scrollIntoView({ behavior: 'smooth', block: 'start'});
   }
 
-  getItemTitle(itemId: number): string {
-    
-    return this.profile.menuItems?.filter(x => x.id === itemId)[0].itemName ?? '';
+  getItemTitle(itemId: number): string {   
+    return this.profile.menuItems?.find(x => x.id == itemId)?.itemName ?? '';
   }
 
   getItemDescription(itemId: number): string {
-    return this.profile.menuItems?.filter(x => x.id === itemId)[0].itemDescription ?? '';
+    return this.profile.menuItems?.find(x => x.id == itemId)?.itemDescription ?? '';
   }
 
   getItemPrice(itemId: number): string {

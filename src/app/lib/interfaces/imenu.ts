@@ -10,7 +10,7 @@ export interface IMenu {
     description?: string;
     startDate?: Date;
     endDate?: Date; 
-    sections?: string;
+    sections?: IMenuItemSection[];
     sectionsObj?: IMenuItemSection[];
     order?: number;
     active?: boolean;

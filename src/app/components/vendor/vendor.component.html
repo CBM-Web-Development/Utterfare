@@ -61,7 +61,7 @@
                                         <div 
                                         class="menu"
                                         [style.backgroundColor]="background">
-                                            @for(section of menu.sectionsObj; track section; let sectionIndex = $index){
+                                            @for(section of menu.sections; track section; let sectionIndex = $index){
                                                 <div class="section">
                                                     <h3 class="section-title">{{ section.title }}</h3>
                                                     <ul class="list-group menu-items"> 

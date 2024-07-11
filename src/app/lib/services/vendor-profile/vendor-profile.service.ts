@@ -22,11 +22,13 @@ export class VendorProfileService {
 
     const profile = this.httpClient.get<IVendorProfile>(endpoint)
       .pipe( map( (response: IVendorProfile) => {
-        response.menus?.forEach( (menu, idx) => {
-          response.menus![idx].sectionsObj =  JSON.parse(menu.sections ?? '') ?? [];
-        })
+        /*response.menus?.forEach( (menu, idx) => {
+          response.menus![idx].sectionsObj =  menu.sections;
+        })*/
+       console.log(response);
         return response;
       }), catchError(error => {
+        console.log(error);
         this.toastr.error("Error fetching the profile. Please reload the page.")
         
         return EMPTY;
