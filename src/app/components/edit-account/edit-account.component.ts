@@ -5,7 +5,7 @@ import { Subscription, take } from 'rxjs';
 import { userAuthSelect } from '../../lib/stores/UserAuth/userauth.selector';
 import { FormControl, FormGroup, NgModel, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { EditAccountService } from '../../lib/services/edit-account/edit-account.service';
+import { EditAccountService } from '../../services/edit-account/edit-account.service';
 import { IErrorMessage } from '../../lib/interfaces/ierror-message';
 import { UsernameValidator } from '../../lib/validators/username-validator';
 import { Router } from '@angular/router';

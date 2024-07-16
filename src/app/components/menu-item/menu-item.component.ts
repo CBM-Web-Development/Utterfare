@@ -2,13 +2,13 @@ import { Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild, ViewC
 import { ActivatedRoute, Router } from '@angular/router';
 import { IMenuItem } from '../../lib/interfaces/imenu-item';
 import { IVendor } from '../../lib/interfaces/ivendor';
-import { MenuItemService } from '../../lib/services/menu-item/menu-item.service';
+import { MenuItemService } from '../../services/menu-item/menu-item.service';
 import { Subscription, take } from 'rxjs';
 import { IVendorItemReview } from '../../lib/interfaces/ivendor-item-review';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { IMedia } from '../../lib/interfaces/imedia';
-import { MediaService } from '../../lib/services/media/media.service';
+import { MediaService } from '../../services/media/media.service';
 import { select, Store } from '@ngrx/store';
 import { IAuthUser } from '../../lib/interfaces/iauth-user';
 import { getCurrencySymbol } from '../../lib/utils/currency';

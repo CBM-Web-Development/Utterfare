@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IUser } from '../../lib/interfaces/iuser';
 import { Subscription, take } from 'rxjs';
 import { IErrorMessage } from '../../lib/interfaces/ierror-message';
-import { SignUpService } from '../../lib/services/sign-up/sign-up.service';
+import { SignUpService } from '../../services/sign-up/sign-up.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({

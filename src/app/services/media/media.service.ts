@@ -1,9 +1,10 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { IMedia } from '../../interfaces/imedia';
-import { MEDIA_ROUTE } from '../../constants/routes';
-import { BehaviorSubject, catchError, EMPTY, map, Observable } from 'rxjs';
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { ToastrService } from "ngx-toastr";
+import { BehaviorSubject, Observable, map, catchError, EMPTY } from "rxjs";
+import { MEDIA_ROUTE } from "../../lib/constants/routes";
+import { IMedia } from "../../lib/interfaces/imedia";
+
 
 @Injectable({
   providedIn: 'root'

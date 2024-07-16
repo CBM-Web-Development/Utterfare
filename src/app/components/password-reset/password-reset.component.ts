@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IUser } from '../../lib/interfaces/iuser';
-import { AuthenticationService } from '../../lib/services/authentication/authentication.service';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { Subscription, take } from 'rxjs';
 import { IErrorMessage } from '../../lib/interfaces/ierror-message';
 import { Router, ActivatedRoute } from '@angular/router';

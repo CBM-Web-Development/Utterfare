@@ -1,11 +1,12 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject, catchError, EMPTY, map, Observable } from 'rxjs';
-import { MEDIA_ROUTE, PROFILE_ROUTE } from '../../constants/routes';
-import { IMedia } from '../../interfaces/imedia';
-import { IErrorMessage } from '../../interfaces/ierror-message';
-import { IProfile } from '../../interfaces/iprofile';
+import { HttpClient, HttpParams, HttpErrorResponse } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { ToastrService } from "ngx-toastr";
+import { BehaviorSubject, Observable, map, catchError, EMPTY } from "rxjs";
+import { MEDIA_ROUTE, PROFILE_ROUTE } from "../../lib/constants/routes";
+import { IErrorMessage } from "../../lib/interfaces/ierror-message";
+import { IMedia } from "../../lib/interfaces/imedia";
+import { IProfile } from "../../lib/interfaces/iprofile";
+
 
 @Injectable({
   providedIn: 'root'

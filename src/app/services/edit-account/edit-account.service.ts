@@ -1,10 +1,10 @@
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject, catchError, EMPTY, map, Observable } from 'rxjs';
-import { IErrorMessage } from '../../interfaces/ierror-message';
-import { USER_ROUTE } from '../../constants/routes';
-import { IUser } from '../../interfaces/iuser';
+import { HttpClient, HttpParams, HttpErrorResponse } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { ToastrService } from "ngx-toastr";
+import { BehaviorSubject, Observable, map, catchError, EMPTY } from "rxjs";
+import { USER_ROUTE } from "../../lib/constants/routes";
+import { IErrorMessage } from "../../lib/interfaces/ierror-message";
+
 
 @Injectable({
   providedIn: 'root'

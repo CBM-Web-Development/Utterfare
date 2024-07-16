@@ -1,11 +1,10 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { ISearchRequest } from '../../interfaces/isearch-request';
-import { SEARCH_ROUTE } from '../../constants/routes';
-import { Observable, map, catchError, EMPTY, BehaviorSubject } from 'rxjs';
-import { ISearchResult } from '../../interfaces/isearch-result';
-import { Store } from '@ngrx/store';
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { ToastrService } from "ngx-toastr";
+import { BehaviorSubject, Observable, map, catchError, EMPTY } from "rxjs";
+import { SEARCH_ROUTE } from "../../lib/constants/routes";
+import { ISearchRequest } from "../../lib/interfaces/isearch-request";
+import { ISearchResult } from "../../lib/interfaces/isearch-result";
 
 @Injectable({
   providedIn: 'root'

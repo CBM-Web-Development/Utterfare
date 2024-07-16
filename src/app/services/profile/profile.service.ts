@@ -1,14 +1,14 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject, catchError, EMPTY, map, Observable } from 'rxjs';
-import { IErrorMessage } from '../../interfaces/ierror-message';
-import { IProfile } from '../../interfaces/iprofile';
-import { IVendorItemReview } from '../../interfaces/ivendor-item-review';
-import { FEED_ROUTE, FOLLOWERS_ROUTE, PROFILE_ROUTE } from '../../constants/routes';
-import { IFeedItem } from '../../interfaces/ifeed-item';
-import { IProfileConnectionResponse } from '../../interfaces/iprofile-connection-response';
-import { IProfileConnection } from '../../interfaces/iprofile-connection';
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { ToastrService } from "ngx-toastr";
+import { BehaviorSubject, Observable, map, catchError, EMPTY } from "rxjs";
+import { PROFILE_ROUTE, FEED_ROUTE, FOLLOWERS_ROUTE } from "../../lib/constants/routes";
+import { IErrorMessage } from "../../lib/interfaces/ierror-message";
+import { IFeedItem } from "../../lib/interfaces/ifeed-item";
+import { IProfile } from "../../lib/interfaces/iprofile";
+import { IProfileConnection } from "../../lib/interfaces/iprofile-connection";
+import { IProfileConnectionResponse } from "../../lib/interfaces/iprofile-connection-response";
+
 
 @Injectable({
   providedIn: 'root'

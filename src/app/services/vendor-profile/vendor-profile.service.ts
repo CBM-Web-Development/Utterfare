@@ -1,10 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { catchError, EMPTY, map, Observable } from 'rxjs';
-import { IVendorProfile } from '../../interfaces/ivendor-profile';
-import { VENDOR_PROFILE_ROUTE } from '../../constants/routes';
-import { IVendor } from '../../interfaces/ivendor';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { ToastrService } from "ngx-toastr";
+import { Observable, map, catchError, EMPTY } from "rxjs";
+import { VENDOR_PROFILE_ROUTE } from "../../lib/constants/routes";
+import { IVendorProfile } from "../../lib/interfaces/ivendor-profile";
 
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ISearchRequest } from '../../lib/interfaces/isearch-request';
-import { SearchService } from '../../lib/services/search/search.service';
+import { SearchService } from '../../services/search/search.service';
 import { ISearchResult } from '../../lib/interfaces/isearch-result';
 import { take } from 'rxjs';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -55,7 +55,7 @@ export class ResultsComponent implements OnInit {
   doSearch(params: ISearchRequest){
 
     this.searchService.doSearch(params).pipe( take(1) ).subscribe( response => {
-      this.filteredResults = this.allResults = response.sort((a, b) => {return a.rank - b.rank});
+      this.filteredResults = this.allResults = response.sort((a, b) => {return b.rank - a.rank});
       this.maxPages = Math.ceil(this.allResults.length / this.perPage);
       this.isLoading = false;
     });
@@ -64,7 +64,7 @@ export class ResultsComponent implements OnInit {
   sortItems(sortBy: string){
     switch(sortBy){
       case 'match':
-        this.filteredResults.sort((a, b) => {return a.rank - b.rank});
+        this.filteredResults.sort((a, b) => {return b.rank - a.rank});
         break;
       case 'asc': 
         this.filteredResults.sort((a, b) => {return a.distance - b.distance});

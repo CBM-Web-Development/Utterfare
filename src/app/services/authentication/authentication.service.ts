@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, EMPTY, map, Observable } from 'rxjs';
-import { IUser } from '../../interfaces/iuser';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { ToastrService } from 'ngx-toastr';
-import { IErrorMessage } from '../../interfaces/ierror-message';
-import { USER_ROUTE } from '../../constants/routes';
-import { IAuthUser } from '../../interfaces/iauth-user';
-import { IAuthentication } from '../../interfaces/iauthentication';
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { ToastrService } from "ngx-toastr";
+import { BehaviorSubject, Observable, map, catchError, EMPTY } from "rxjs";
+import { USER_ROUTE } from "../../lib/constants/routes";
+import { IAuthUser } from "../../lib/interfaces/iauth-user";
+import { IAuthentication } from "../../lib/interfaces/iauthentication";
+import { IErrorMessage } from "../../lib/interfaces/ierror-message";
+import { IUser } from "../../lib/interfaces/iuser";
+
 
 @Injectable({
   providedIn: 'root'
@@ -75,17 +76,19 @@ export class AuthenticationService {
 
   authenticate(user: IUser): Observable<IAuthUser>{
     this.isLoading$.next(true);
+    console.log(user);
 
     const authUser = this.httpClient.post<IAuthUser>(`${USER_ROUTE}/authenticate/user`, user)
       .pipe( map((response: IAuthUser) => {
         this.isLoading$.next(false);
+
         const authUser: IAuthUser = {
           auth: response.auth, 
           profile: response.profile
         }
-
         return authUser;
       }), catchError( error => {
+
         this.isLoading$.next(false);
         if(error.status === 400){
           const errors: IErrorMessage[] = error.error; 
@@ -95,7 +98,7 @@ export class AuthenticationService {
         return EMPTY;
       }));
 
-    return authUser;
+      return authUser;
   }
 
   validateToken(user: IAuthentication): Observable<boolean>{

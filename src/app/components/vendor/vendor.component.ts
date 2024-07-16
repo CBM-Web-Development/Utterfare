@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { IVendorProfile } from '../../lib/interfaces/ivendor-profile';
-import { VendorProfileService } from '../../lib/services/vendor-profile/vendor-profile.service';
+import { VendorProfileService } from '../../services/vendor-profile/vendor-profile.service';
 import { take } from 'rxjs';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { getCurrencySymbol } from '../../lib/utils/currency';
 import { Meta, Title } from '@angular/platform-browser';
-import { MenuItemService } from '../../lib/services/menu-item/menu-item.service';
+import { MenuItemService } from '../../services/menu-item/menu-item.service';
 import { IMenuItem } from '../../lib/interfaces/imenu-item';
 import { IVendorItem } from '../../lib/interfaces/ivendor-item';
 import { IMenu } from '../../lib/interfaces/imenu';

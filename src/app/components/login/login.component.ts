@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AuthenticationService } from '../../lib/services/authentication/authentication.service';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IUser } from '../../lib/interfaces/iuser';
 import { take } from 'rxjs';

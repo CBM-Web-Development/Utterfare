@@ -2,12 +2,12 @@ import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges, TemplateRef, Vi
 import { ActivatedRoute, Router } from '@angular/router';
 import { IAuthUser } from '../../lib/interfaces/iauth-user';
 import { Subscription, take } from 'rxjs';
-import { AuthenticationService } from '../../lib/services/authentication/authentication.service';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { IProfile } from '../../lib/interfaces/iprofile';
 import { IFeedItem } from '../../lib/interfaces/ifeed-item';
 import { Store } from '@ngrx/store';
 import { userAuthSelect } from '../../lib/stores/UserAuth/userauth.selector';
-import { ProfileService } from '../../lib/services/profile/profile.service';
+import { ProfileService } from '../../services/profile/profile.service';
 import { IVendorItemReview } from '../../lib/interfaces/ivendor-item-review';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IProfileConnectionResponse } from '../../lib/interfaces/iprofile-connection-response';

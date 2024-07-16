@@ -6,8 +6,8 @@ import { userAuthSelect } from '../../lib/stores/UserAuth/userauth.selector';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IProfile } from '../../lib/interfaces/iprofile';
-import { EditProfileService } from '../../lib/services/edit-profile/edit-profile.service';
-import { MediaService } from '../../lib/services/media/media.service';
+import { EditProfileService } from '../../services/edit-profile/edit-profile.service';
+import { MediaService } from '../../services/media/media.service';
 import { updateUserAuth, updateUserAuthProfile } from '../../lib/stores/UserAuth/userauth.actions';
 
 @Component({

@@ -35,9 +35,8 @@ export class MainLayoutComponent implements OnInit {
   ){}
   
   ngOnInit(){
-
-    if(localStorage.getItem('authUser') !== null){
-      this.authUser = JSON.parse(localStorage.getItem('authUser') ?? '{}');
+    this.authUser = JSON.parse(localStorage.getItem('authUser') ?? '{}');
+    if(this.authUser !== null && this.authUser.profile.id !== undefined ){
       this.isLoggedIn = this.authUser.profile.id !== undefined && this.authUser.profile.id !== 0;
       this.store.dispatch(setUserAuth({payload: this.authUser}));
     }

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ILocation } from '../../lib/interfaces/ilocation';
 import { ISearchRequest } from '../../lib/interfaces/isearch-request';
 import { ISearchResult } from '../../lib/interfaces/isearch-result';
-import { SearchService } from '../../lib/services/search/search.service';
+import { SearchService } from '../../services/search/search.service';
 import { Subscription, take } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { locationKey } from '../../lib/stores/Location/location.reducer';
